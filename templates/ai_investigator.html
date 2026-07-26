@@ -2,6 +2,41 @@
 
 {% block content %}
 
-<h1>AI Investigator</h1>
+<div class="investigator-placeholder">
+
+    <div class="ai-icon">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <h2>AI Investigator</h2>
+
+    <p>
+        Interact with your AI assistant to understand fraud predictions, investigate
+        suspicious invoices, and receive explainable insights.
+    </p>
+
+    <div class="chat-placeholder">
+
+        <input
+            type="text"
+            placeholder="Ask a question about an analyzed invoice..."
+            disabled>
+
+        <button disabled>
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+
+    </div>
+
+    <small>
+        Analyze an invoice first to enable AI-powered investigation.
+    </small>
+
+    <a href="{{ url_for('fraud_detection') }}" class="primary-btn">
+        <i class="fa-solid fa-arrow-right"></i>
+        Go to Fraud Detection
+    </a>
+
+</div>
 
 {% endblock %}

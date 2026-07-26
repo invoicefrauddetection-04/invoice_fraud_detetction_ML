@@ -2281,3 +2281,99 @@ grid-template-columns:1fr;
     max-width:550px;
     color:#9CA3AF;
 }
+
+/* 
+AI Section Styles
+ */
+
+ .investigator-placeholder{
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.ai-icon{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(59,130,246,0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.ai-icon i{
+    font-size: 40px;
+    color: #3B82F6;
+}
+
+.investigator-placeholder h2{
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: #F8FAFC;
+}
+
+.investigator-placeholder p{
+    max-width: 650px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.chat-placeholder{
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    margin-bottom: 18px;
+}
+
+.chat-placeholder input{
+    flex: 1;
+    padding: 15px 18px;
+    border: 1px solid #374151;
+    border-radius: 12px 0 0 12px;
+    background: #1E293B;
+    color: #94A3B8;
+    outline: none;
+}
+
+.chat-placeholder input::placeholder{
+    color: #64748B;
+}
+
+.chat-placeholder button{
+    width: 60px;
+    border: none;
+    background: #3B82F6;
+    color: white;
+    border-radius: 0 12px 12px 0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.investigator-placeholder small{
+    color: #64748B;
+    margin-bottom: 28px;
+}
+
+.primary-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #3B82F6;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.primary-btn:hover{
+    background: #2563EB;
+}
