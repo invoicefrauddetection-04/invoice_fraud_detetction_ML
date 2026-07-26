@@ -2377,3 +2377,44 @@ AI Section Styles
 .primary-btn:hover{
     background: #2563EB;
 }
+
+/* Report Section Styles
+ */
+
+ .reports-placeholder{
+    min-height:450px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+}
+
+.report-icon{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:rgba(59,130,246,.12);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.report-icon i{
+    font-size:40px;
+    color:#3B82F6;
+}
+
+.reports-placeholder h2{
+    font-size:2rem;
+    margin-bottom:12px;
+}
+
+.reports-placeholder p{
+    max-width:650px;
+    color:#94A3B8;
+    line-height:1.7;
+    margin-bottom:30px;
+}
