@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard fade-in">
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero-section">
+
+        <div class="hero-left">
+
+            <h1>
+                Welcome Back, Administrator 👋
+            </h1>
+
+            <p>
+                Monitor procurement activities, detect invoice fraud,
+                analyze supplier risks, and gain AI-powered insights
+                from a single intelligent platform.
+            </p>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="hero-date">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>July 26, 2026</span>
+
+            </div>
+
+            <button class="btn btn-primary">
+
+                <i class="fa-solid fa-file-arrow-up"></i>
+
+                Analyze New Invoice
+
+            </button>
+
+        </div>
+
+    </section>
+
+   <!-- ================= Platform Features ================= -->
+
+<section class="features-section">
+
+    <div class="section-title">
+        <h2>Platform Features</h2>
+        <p>
+            ProcureGuard AI combines document intelligence, machine learning and
+            explainable AI to identify fraudulent procurement invoices.
+        </p>
+    </div>
+
+    <div class="features-grid">
+
+        <!-- Card 1 -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-file-arrow-up"></i>
+            </div>
+
+            <h3>Document Upload</h3>
+
+            <p>
+                Upload procurement invoices in PDF, PNG or JPEG format
+                for fraud analysis.
+            </p>
+
+            <a href="/fraud-detection">
+                Upload Invoice →
+            </a>
+
+        </div>
+
+        <!-- Card 2 -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <h3>OCR Extraction</h3>
+
+            <p>
+                Extract invoice information using Optical Character
+                Recognition before analysis.
+            </p>
+
+        </div>
+
+        <!-- Card 3 -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>Fraud Detection</h3>
+
+            <p>
+                Machine Learning predicts whether an invoice
+                is Fraud or Genuine with confidence.
+            </p>
+
+        </div>
+
+        <!-- Card 4 -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+
+            <h3>Explainable AI</h3>
+
+            <p>
+                Understand the prediction using SHAP-based
+                feature importance visualization.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+{% endblock %}

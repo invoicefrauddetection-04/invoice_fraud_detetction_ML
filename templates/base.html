@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProcureGuard AI</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                <h2>ProcureGuard AI</h2>
+
+                <p>Procurement Fraud Intelligence Platform</p>
+
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+
+        <nav class="menu">
+
+            <a href="{{ url_for('dashboard') }}"
+                class="{% if request.endpoint=='dashboard' %}active{% endif %}">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+            <a href="{{ url_for('fraud_detection') }}"
+                class="{% if request.endpoint=='fraud_detection' %}active{% endif %}">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>Fraud Detection</span>
+
+            </a>
+
+            <a href="{{ url_for('analytics') }}"
+                class="{% if request.endpoint=='analytics' %}active{% endif %}">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Business Analytics</span>
+
+            </a>
+
+            <a href="{{ url_for('ai') }}"
+                class="{% if request.endpoint=='ai' %}active{% endif %}">
+
+                <i class="fa-solid fa-robot"></i>
+
+                <span>AI Investigator</span>
+
+            </a>
+
+            <a href="{{ url_for('reports') }}"
+                class="{% if request.endpoint=='reports' %}active{% endif %}">
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+        </nav>
+
+        <!-- Bottom Section -->
+
+        <div class="sidebar-bottom">
+
+            <hr>
+
+            <a href="{{ url_for('about') }}"
+                class="{% if request.endpoint=='about' %}active{% endif %}">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>About</span>
+
+            </a>
+
+            <div class="version">
+
+                Version 1.0
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main-container">
+
+        <!-- Navbar -->
+
+        <header class="navbar">
+
+    <div class="page-title">
+
+        {% if request.endpoint=="dashboard" %}
+        Dashboard
+        {% elif request.endpoint=="fraud_detection" %}
+        Fraud Detection
+        {% elif request.endpoint=="analytics" %}
+        Business Analytics
+        {% elif request.endpoint=="ai" %}
+        AI Investigator
+        {% elif request.endpoint=="reports" %}
+        Reports
+        {% elif request.endpoint=="about" %}
+        About
+        {% endif %}
+
+    </div>
+
+    <div class="navbar-right">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input type="text"
+                placeholder="Search Invoice, Supplier or PO Number...">
+
+        </div>
+
+        <div class="notification">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </div>
+
+        <div class="profile">
+
+            <img src="https://ui-avatars.com/api/?name=Admin&background=2563EB&color=fff"
+                 alt="Profile">
+
+            <div class="profile-info">
+
+                <h4>Administrator</h4>
+
+                <p>System Admin</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+        <!-- Main Content -->
+
+        <main class="content" id="main-content">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
