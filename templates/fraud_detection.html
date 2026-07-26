@@ -2,65 +2,6 @@
 
 {% block content %}
 
-<div class="fraud-container">
-
-    <!-- Upload Card -->
-
-    <div class="upload-card card">
-        <h2>
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            Upload Invoice
-        </h2>
-        <div class="upload-area" id="dropArea">
-
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-
-            <h3>Drag & Drop Invoice</h3>
-
-            <p>PDF, PNG or JPEG</p>
-
-            <input
-                type="file"
-                id="invoiceInput"
-                accept=".pdf,.png,.jpg,.jpeg"
-                hidden>
-
-            <button id="browseBtn" class="primary-btn">
-
-                Browse Files
-
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- Preview Card -->
-
-    <div class="preview-card card">
-
-        <h2>
-        <i class="fa-solid fa-eye"></i>
-        Invoice Preview
-        </h2>
-
-        <div id="previewContainer">
-
-            <div class="preview-placeholder">
-
-                <i class="fa-regular fa-file"></i>
-
-                <p>No Invoice Selected</p>
-                <p>Upload an invoice to preview it here.</p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
 <!-- ================= Workflow ================= -->
 
 <section class="workflow-card card">
@@ -121,6 +62,67 @@
     </div>
 
 </section>
+
+
+<div class="fraud-container">
+
+    <!-- Upload Card -->
+
+    <div class="upload-card card">
+        <h2>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Upload Invoice
+        </h2>
+        <div class="upload-area" id="dropArea">
+
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            <h3>Drag & Drop Invoice</h3>
+
+            <p>PDF, PNG or JPEG</p>
+
+            <input
+                type="file"
+                id="invoiceInput"
+                accept=".pdf,.png,.jpg,.jpeg"
+                hidden>
+
+            <button id="browseBtn" class="primary-btn">
+
+                Browse Files
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Preview Card -->
+
+    <div class="preview-card card">
+
+        <h2>
+        <i class="fa-solid fa-eye"></i>
+        Invoice Preview
+        </h2>
+
+        <div id="previewContainer">
+
+            <div class="preview-placeholder">
+
+                <i class="fa-regular fa-file"></i>
+
+                <p>No Invoice Selected</p>
+                <p>Upload an invoice to preview it here.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <!-- ================= Analyze Section ================= -->
 
