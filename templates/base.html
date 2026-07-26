@@ -161,11 +161,9 @@
 
         </div>
 
-        <div class="notification">
-
-            <i class="fa-solid fa-bell"></i>
-
-        </div>
+<div class="theme-toggle" id="themeToggle">
+    <i class="fa-solid fa-moon"></i>
+</div>
 
         <div class="profile">
 
@@ -197,7 +195,10 @@
 
     </div>
 
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
 {% block scripts %}{% endblock %}
+
 </body>
 
 </html>

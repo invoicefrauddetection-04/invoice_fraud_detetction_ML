@@ -1625,6 +1625,34 @@ tbody tr:hover{
     color: #60A5FA;
 }
 
+.theme-toggle{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1F2937;
+    border:1px solid #374151;
+    border-radius:50%;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.theme-toggle i{
+    font-size:18px;
+    color:#FBBF24;
+    transition:.3s;
+}
+
+.theme-toggle:hover{
+    background:#2A3647;
+    border-color:#3B82F6;
+    transform:rotate(15deg);
+}
+
+.theme-toggle:hover i{
+    color:#FFD54F;
+}
 /* =========================
         RESPONSIVE
 ========================= */
