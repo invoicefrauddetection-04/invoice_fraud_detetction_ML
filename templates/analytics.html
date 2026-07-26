@@ -2,6 +2,23 @@
 
 {% block content %}
 
-<h1>Business Analytics</h1>
+<div class="analytics-placeholder">
+
+    <i class="fa-solid fa-chart-line placeholder-icon"></i>
+
+    <h2>Analytics Not Available</h2>
+
+    <p>
+        Business analytics will be generated after invoices are processed
+        through the Fraud Detection module.
+    </p>
+
+    <a href="{{ url_for('fraud_detection') }}" class="primary-btn">
+        <i class="fa-solid fa-arrow-right"></i>
+        Go to Fraud Detection
+    </a>
+
+</div>
+
 
 {% endblock %}

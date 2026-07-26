@@ -2258,3 +2258,26 @@ grid-template-columns:1fr;
     color:white;
 
 }
+
+/* For temporary Analytics Section */
+
+.analytics-placeholder{
+    min-height: 420px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    gap:16px;
+}
+
+.placeholder-icon{
+    font-size:60px;
+    color:var(--primary-color);
+    opacity:.8;
+}
+
+.analytics-placeholder p{
+    max-width:550px;
+    color:#9CA3AF;
+}
