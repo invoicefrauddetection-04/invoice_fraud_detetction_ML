@@ -11,6 +11,7 @@ const stepUpload = document.getElementById("step-upload");
 const stepProcessing = document.getElementById("step-processing");
 const stepResult = document.getElementById("step-result");
 const analyzeBtn = document.getElementById("analyzeBtn");
+const API_URL = "http://192.168.1.208:8000/upload";
 
 
 browse.addEventListener("click", () => {
@@ -115,71 +116,230 @@ const processingCard = document.getElementById("processingCard");
 const processingStatus = document.getElementById("processingStatus");
 const progressFill = document.getElementById("progressFill");
 
-analyzeBtn.addEventListener("click", () => {
+// analyzeBtn.addEventListener("click", async () => {
 
-    processingCard.style.display = "block";
+//     const file = input.files[0];
 
-    stepProcessing.classList.add("active");
+//     if (!file) {
+//         alert("Please select an invoice.");
+//         return;
+//     }
 
-    const steps = [
+//     processingCard.style.display = "block";
 
-        {
-            text:"Reading invoice...",
-            progress:20
-        },
+//     stepProcessing.classList.add("active");
 
-        {
-            text:"Extracting invoice fields...",
-            progress:40
-        },
+//     processingStatus.textContent = "Uploading Invoice...";
 
-        {
-            text:"Running fraud detection model...",
-            progress:65
-        },
+//     progressFill.style.width = "10%";
 
-        {
-            text:"Calculating fraud probability...",
-            progress:85
-        },
+//     const formData = new FormData();
 
-        {
-            text:"Generating explainability...",
-            progress:100
+//     formData.append("file", file);
+
+//     try {
+
+//         const response = await fetch(API_URL, {
+
+//             method: "POST",
+
+//             body: formData
+
+//         });
+
+//         if (!response.ok) {
+
+//             throw new Error("Upload Failed");
+
+//         }
+
+//         const data = await response.json();
+
+//         console.log(data);
+
+//         processingStatus.textContent = "Processing Invoice...";
+
+//         progressFill.style.width = "100%";
+
+//         stepResult.classList.add("active");
+
+//         processingStatus.textContent = "Completed ✔";
+
+//         console.log(data);
+
+//     }
+
+//     catch(error){
+
+//         console.error(error);
+
+//         processingStatus.textContent = "Upload Failed";
+
+//     }
+
+// });
+
+// analyzeBtn.addEventListener("click", async () => {
+
+//     const file = input.files[0];
+
+//     if (!file) {
+//         alert("Please select a file");
+//         return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append("file", file);
+
+//     try {
+
+//         const response = await fetch("http://192.168.1.208:8000/upload", {
+//             method: "POST",
+//             body: formData
+//         });
+
+//         const data = await response.json();
+
+//         console.log("Backend Response:", data);
+
+//         alert("Upload Successful");
+
+//     } catch (err) {
+
+//         console.error(err);
+
+//         alert("Upload Failed");
+
+//     }
+// });
+
+// Backend URL
+const API_BASE_URL = "http://192.168.1.208:8000";
+
+analyzeBtn.addEventListener("click", async () => {
+
+    const file = input.files[0];
+
+    if (!file) {
+        alert("Please select an invoice.");
+        return;
+    }
+
+    analyzeBtn.disabled = true;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+
+        // -----------------------------
+        // Upload invoice to backend
+        // -----------------------------
+        const response = await fetch(`${API_BASE_URL}/upload`, {
+            method: "POST",
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error("Upload Failed");
         }
 
-    ];
+        const data = await response.json();
 
-    let index = 0;
+        console.log("Backend Response:", data);
 
-    const interval = setInterval(() => {
+        // -----------------------------
+        // Upload Successful
+        // -----------------------------
+        processingCard.style.display = "block";
 
-        processingStatus.textContent = steps[index].text;
+        stepProcessing.classList.add("active");
 
-        progressFill.style.width = steps[index].progress + "%";
+        const steps = [
 
-        index++;
+            {
+                text: "Uploading invoice...",
+                progress: 15
+            },
 
-        if(index === steps.length){
+            {
+                text: "Converting PDF to Images...",
+                progress: 35
+            },
 
-    clearInterval(interval);
+            {
+                text: "Extracting invoice fields...",
+                progress: 55
+            },
 
-    stepResult.classList.add("active");
+            {
+                text: "Running Fraud Detection...",
+                progress: 80
+            },
 
-    processingStatus.textContent = "Analysis Complete ✔";
+            {
+                text: "Generating Results...",
+                progress: 100
+            }
 
-    // Show Prediction Card
-    const predictionCard = document.getElementById("predictionCard");
-    predictionCard.style.display = "block";
+        ];
 
-    // Fill Prediction Details
-    document.getElementById("predictionBadge").textContent = "Fraud Detected";
-    document.getElementById("confidenceValue").textContent = "96.42%";
-    document.getElementById("riskLevel").textContent = "High";
-    document.getElementById("invoiceId").textContent = "INV-2026-001";
+        let index = 0;
 
-}
+        const interval = setInterval(() => {
 
-    },1500);
+            processingStatus.textContent = steps[index].text;
+
+            progressFill.style.width =
+                steps[index].progress + "%";
+
+            index++;
+
+            if (index === steps.length) {
+
+                clearInterval(interval);
+
+                stepResult.classList.add("active");
+
+                processingStatus.textContent =
+                    "Analysis Complete ✔";
+
+                const predictionCard =
+                    document.getElementById("predictionCard");
+
+                predictionCard.style.display = "block";
+
+                // Temporary values
+                document.getElementById("predictionBadge").textContent =
+                    "Processing Completed";
+
+                document.getElementById("confidenceValue").textContent =
+                    "100%";
+
+                document.getElementById("riskLevel").textContent =
+                    "Pending ML";
+
+                document.getElementById("invoiceId").textContent =
+                    data.filename;
+
+            }
+
+        }, 1200);
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        alert("Unable to upload invoice.");
+
+    }
+    finally {
+
+        analyzeBtn.disabled = false;
+
+    }
 
 });
+
+
