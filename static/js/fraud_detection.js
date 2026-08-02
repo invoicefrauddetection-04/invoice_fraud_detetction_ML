@@ -11,7 +11,32 @@ const stepUpload = document.getElementById("step-upload");
 const stepProcessing = document.getElementById("step-processing");
 const stepResult = document.getElementById("step-result");
 const analyzeBtn = document.getElementById("analyzeBtn");
-const API_URL = "http://192.168.1.208:8000/upload";
+
+// const API_URL = "http://192.168.2.214:8000/upload";
+
+async function waitForPrediction(imageName) {
+
+    while (true) {
+
+        const response = await fetch(
+            `${API_BASE_URL}/prediction/${imageName}`
+        );
+
+        const prediction = await response.json();
+
+        console.log(prediction);
+
+        if (prediction.status === "success") {
+
+            return prediction;
+
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+    }
+
+}
 
 
 browse.addEventListener("click", () => {
@@ -116,105 +141,24 @@ const processingCard = document.getElementById("processingCard");
 const processingStatus = document.getElementById("processingStatus");
 const progressFill = document.getElementById("progressFill");
 
-// analyzeBtn.addEventListener("click", async () => {
-
-//     const file = input.files[0];
-
-//     if (!file) {
-//         alert("Please select an invoice.");
-//         return;
-//     }
-
-//     processingCard.style.display = "block";
-
-//     stepProcessing.classList.add("active");
-
-//     processingStatus.textContent = "Uploading Invoice...";
-
-//     progressFill.style.width = "10%";
-
-//     const formData = new FormData();
-
-//     formData.append("file", file);
-
-//     try {
-
-//         const response = await fetch(API_URL, {
-
-//             method: "POST",
-
-//             body: formData
-
-//         });
-
-//         if (!response.ok) {
-
-//             throw new Error("Upload Failed");
-
-//         }
-
-//         const data = await response.json();
-
-//         console.log(data);
-
-//         processingStatus.textContent = "Processing Invoice...";
-
-//         progressFill.style.width = "100%";
-
-//         stepResult.classList.add("active");
-
-//         processingStatus.textContent = "Completed ✔";
-
-//         console.log(data);
-
-//     }
-
-//     catch(error){
-
-//         console.error(error);
-
-//         processingStatus.textContent = "Upload Failed";
-
-//     }
-
-// });
-
-// analyzeBtn.addEventListener("click", async () => {
-
-//     const file = input.files[0];
-
-//     if (!file) {
-//         alert("Please select a file");
-//         return;
-//     }
-
-//     const formData = new FormData();
-//     formData.append("file", file);
-
-//     try {
-
-//         const response = await fetch("http://192.168.1.208:8000/upload", {
-//             method: "POST",
-//             body: formData
-//         });
-
-//         const data = await response.json();
-
-//         console.log("Backend Response:", data);
-
-//         alert("Upload Successful");
-
-//     } catch (err) {
-
-//         console.error(err);
-
-//         alert("Upload Failed");
-
-//     }
-// });
-
 // Backend URL
-const API_BASE_URL = "http://192.168.1.208:8000";
+// change the IP here to your backend server's IP address
+const API_BASE_URL = "http://192.168.1.211:8000";
+
+const processingMessages = [
+
+    "Processing...",
+
+    "Please wait...",
+
+    "Analyzing invoice...",
+
+    "Still processing...",
+
+    "Preparing results..."
+
+];
+
 
 analyzeBtn.addEventListener("click", async () => {
 
@@ -248,6 +192,11 @@ analyzeBtn.addEventListener("click", async () => {
 
         console.log("Backend Response:", data);
 
+        const imageName = data.image_name;
+
+        // Start polling backend immediately (runs in parallel)
+        const predictionPromise = waitForPrediction(imageName);
+
         // -----------------------------
         // Upload Successful
         // -----------------------------
@@ -255,76 +204,96 @@ analyzeBtn.addEventListener("click", async () => {
 
         stepProcessing.classList.add("active");
 
-        const steps = [
+        let progress = 10;
+    let msgIndex = 0;
 
-            {
-                text: "Uploading invoice...",
-                progress: 15
-            },
+    processingStatus.textContent = processingMessages[0];
+    progressFill.style.width = progress + "%";
 
-            {
-                text: "Converting PDF to Images...",
-                progress: 35
-            },
+    const interval = setInterval(() => {
 
-            {
-                text: "Extracting invoice fields...",
-                progress: 55
-            },
+    // Change message
+    processingStatus.textContent =
+        processingMessages[msgIndex];
 
-            {
-                text: "Running Fraud Detection...",
-                progress: 80
-            },
+    if (msgIndex < processingMessages.length - 1) {
+        msgIndex++;
+    }
 
-            {
-                text: "Generating Results...",
-                progress: 100
-            }
+    // Slowly increase progress but stop at 90%
+    if (progress < 90) {
 
-        ];
+        progress += Math.random() * 8;
 
-        let index = 0;
+        if (progress > 90)
+            progress = 90;
 
-        const interval = setInterval(() => {
+        progressFill.style.width = progress + "%";
 
-            processingStatus.textContent = steps[index].text;
+    }
 
-            progressFill.style.width =
-                steps[index].progress + "%";
+}, 2500);
 
-            index++;
+        const prediction = await predictionPromise;
 
-            if (index === steps.length) {
+        clearInterval(interval);
 
-                clearInterval(interval);
+        progressFill.style.width = "100%";
 
-                stepResult.classList.add("active");
+        processingStatus.textContent =
+            "Analysis Complete ✔";
 
-                processingStatus.textContent =
-                    "Analysis Complete ✔";
+        stepResult.classList.add("active");
 
-                const predictionCard =
-                    document.getElementById("predictionCard");
+        const predictionCard =
+    document.getElementById("predictionCard");
 
-                predictionCard.style.display = "block";
+        predictionCard.style.display = "block";
 
-                // Temporary values
-                document.getElementById("predictionBadge").textContent =
-                    "Processing Completed";
+        // document.getElementById("predictionBadge").textContent =
+        //     prediction.prediction;
 
-                document.getElementById("confidenceValue").textContent =
-                    "100%";
+        const predictionBadge =
+            document.getElementById("predictionBadge");
 
-                document.getElementById("riskLevel").textContent =
-                    "Pending ML";
+        predictionBadge.textContent = prediction.prediction;
 
-                document.getElementById("invoiceId").textContent =
-                    data.filename;
+        // Remove previous prediction colors
+        predictionBadge.classList.remove("fraud", "genuine");
 
-            }
+        // Apply color according to model prediction
+        if (prediction.prediction.toLowerCase() === "fraud") {
 
-        }, 1200);
+            predictionBadge.classList.add("fraud");
+
+        } else {
+
+            predictionBadge.classList.add("genuine");
+
+        }
+
+        const confidence =
+            (prediction.fraud_probability * 100).toFixed(2);
+
+        document.getElementById("confidenceValue").textContent =
+            confidence + "%";
+
+        let risk;
+
+        if (prediction.fraud_probability >= 0.80)
+            risk = "High";
+        else if (prediction.fraud_probability >= 0.40)
+            risk = "Medium";
+        else
+            risk = "Low";
+
+        document.getElementById("riskLevel").textContent =
+            risk;
+
+        document.getElementById("invoiceId").textContent =
+            data.filename;
+
+        analyzeBtn.disabled = false;
 
     }
     catch (error) {
@@ -335,8 +304,6 @@ analyzeBtn.addEventListener("click", async () => {
 
     }
     finally {
-
-        analyzeBtn.disabled = false;
 
     }
 
