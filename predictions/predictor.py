@@ -1,39 +1,115 @@
 from predictions.feature_engineering import prepare_features
 from predictions.load_model import model, preprocessor
-
-
-def predict_invoice(document_id):
-    feature_df = prepare_features(document_id)
-
-    transformed = preprocessor.transform(feature_df)
-
-    prediction = model.predict(transformed)[0]
-    probability = model.predict_proba(transformed)[0][1]
-
-    label = "Fraud" if prediction == 1 else "Genuine"
-
-    return label, float(probability)
+from database.scripts.db_connection import get_connection
 
 
 # ----------------------------------------------------
-# Testing Purpose Only
+# Predict Invoice
+# ----------------------------------------------------
+
+def predict_invoice(document_id):
+    """
+    Generate fraud prediction for a document.
+
+    Returns
+    -------
+    tuple
+        (
+            prediction_label,
+            fraud_probability,
+            feature_df
+        )
+    """
+
+    # Generate engineered features
+    feature_df = prepare_features(document_id)
+
+    # Preprocess features
+    transformed_features = preprocessor.transform(feature_df)
+
+    # Prediction
+    prediction = model.predict(transformed_features)[0]
+
+    # Fraud Probability
+    probability = model.predict_proba(transformed_features)[0][1]
+
+    # Convert prediction to label
+    prediction_label = (
+        "Fraud"
+        if prediction == 1
+        else "Genuine"
+    )
+
+    return (
+        prediction_label,
+        float(probability),
+        feature_df
+    )
+
+
+# ----------------------------------------------------
+# Get Feature Generated Documents
+# ----------------------------------------------------
+
+def get_feature_generated_documents():
+    """
+    Fetch documents whose features have been generated
+    and are ready for prediction.
+    """
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    query = """
+        SELECT document_id
+        FROM uploaded_documents
+        WHERE processing_status = 'FEATURES_GENERATED'
+        ORDER BY document_id;
+    """
+
+    cur.execute(query)
+
+    rows = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return rows
+
+
+# ----------------------------------------------------
+# Testing
 # ----------------------------------------------------
 
 if __name__ == "__main__":
 
-    try:
-        document_id = int(input("Enter Document ID: "))
+    rows = get_feature_generated_documents()
 
-        prediction, probability = predict_invoice(document_id)
+    if not rows:
 
-        print("\nPrediction Results")
-        print("------------------")
-        print(f"Document ID       : {document_id}")
-        print(f"Prediction        : {prediction}")
-        print(f"Fraud Probability : {probability:.4f}")
+        print("No documents ready for prediction.")
 
-    except ValueError:
-        print("Invalid Document ID. Please enter a numeric value.")
+    else:
 
-    except Exception as e:
-        print(f"Error: {e}")
+        for (document_id,) in rows:
+
+            try:
+
+                prediction, probability, feature_df = predict_invoice(
+                    document_id
+                )
+
+                print("\n===================================")
+                print(f"Document ID       : {document_id}")
+                print(f"Prediction        : {prediction}")
+                print(f"Fraud Probability : {probability:.4f}")
+
+                print("\nFeature DataFrame")
+                print(feature_df)
+
+            except Exception as e:
+
+                print(f"\n✗ Failed for Document {document_id}")
+                print(e)
+
+                continue

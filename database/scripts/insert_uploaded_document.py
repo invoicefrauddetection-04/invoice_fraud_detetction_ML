@@ -87,6 +87,15 @@ def insert_uploaded_documents():
     print(f"{inserted} images inserted successfully.")
 
 
-if __name__ == "__main__":
+# ----------------------------------------------------
+# Pipeline Function
+# ----------------------------------------------------
+
+def process_uploaded_documents():
 
     insert_uploaded_documents()
+
+
+if __name__ == "__main__":
+
+    process_uploaded_documents()

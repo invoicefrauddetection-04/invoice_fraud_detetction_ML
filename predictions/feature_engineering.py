@@ -80,6 +80,31 @@ def get_submission_hour(document_id):
     return uploaded_timestamp.hour
 
 #-----------------------------------
+# Get OCR Completed Documents
+#-----------------------------------
+
+def get_ocr_completed_documents():
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    query = """
+        SELECT document_id
+        FROM uploaded_documents
+        WHERE processing_status = 'OCR_COMPLETED'
+        ORDER BY document_id;
+    """
+
+    cur.execute(query)
+
+    rows = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return rows
+
+#-----------------------------------
 # Compute Global Statistics
 #-----------------------------------
 
@@ -275,12 +300,35 @@ def prepare_features(document_id):
     return df
 
 #-----------------------------------
+# Update Processing Status
+#-----------------------------------
+
+def update_processing_status(document_id):
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    query = """
+        UPDATE uploaded_documents
+        SET processing_status='FEATURES_GENERATED'
+        WHERE document_id=%s;
+    """
+
+    cur.execute(query,(document_id,))
+
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+'''
+#-----------------------------------
 # Testing Block
 #-----------------------------------
 
 if __name__ == "__main__":
 
-    document_id = 15
+    document_id = 27
 
     feature_df = prepare_features(document_id)
 
@@ -295,3 +343,49 @@ if __name__ == "__main__":
     print("\nShape\n")
 
     print(feature_df.shape)
+
+'''
+# ----------------------------------------------------
+# Pipeline Function
+# ----------------------------------------------------
+
+def process_features():
+
+    rows = get_ocr_completed_documents()
+
+    if not rows:
+
+        print("No OCR completed documents found.")
+
+        return
+
+    for (document_id,) in rows:
+
+        try:
+
+            print("\n===================================")
+            print(f"Processing Document : {document_id}")
+            print("===================================")
+
+            feature_df = prepare_features(document_id)
+
+            print("\nGenerated Features\n")
+
+            print(feature_df)
+
+            update_processing_status(document_id)
+
+            print(f"\n✓ Features generated for Document {document_id}")
+
+        except Exception as e:
+
+            print(f"\n✗ Failed for Document {document_id}")
+
+            print(e)
+
+            continue
+
+
+if __name__ == "__main__":
+
+    process_features()

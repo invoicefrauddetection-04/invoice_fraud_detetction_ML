@@ -14,8 +14,8 @@ FROM training_invoices
 GROUP BY is_fraud;
 */
 
---select *
---from uploaded_documents;
+select *
+from uploaded_documents;
 
 --ALTER TABLE uploaded_documents
 --ADD CONSTRAINT unique_object_key UNIQUE (object_key);
@@ -68,10 +68,15 @@ LIMIT 10;
 
 --DELETE FROM prediction_results WHERE document_id = 8;
 
+
+/*
 SELECT
 column_name,
 data_type
 FROM information_schema.columns
 WHERE table_name='ocr_results';
+*/
 
+--select version();
 
+--show listen_addresses;
