@@ -3,6 +3,8 @@
 // Fraud Detection
 // ===================================
 
+let currentDocumentId = null;
+
 const input = document.getElementById("invoiceInput");
 const browse = document.getElementById("browseBtn");
 const preview = document.getElementById("previewContainer");
@@ -11,6 +13,12 @@ const stepUpload = document.getElementById("step-upload");
 const stepProcessing = document.getElementById("step-processing");
 const stepResult = document.getElementById("step-result");
 const analyzeBtn = document.getElementById("analyzeBtn");
+
+const aiExplanationAction =
+    document.getElementById("aiExplanationAction");
+
+const explainAiBtn =
+    document.getElementById("explainAiBtn");
 
 // const API_URL = "http://192.168.2.214:8000/upload";
 
@@ -143,7 +151,7 @@ const progressFill = document.getElementById("progressFill");
 
 // Backend URL
 // change the IP here to your backend server's IP address
-const API_BASE_URL = "http://192.168.1.211:8000";
+const API_BASE_URL = "http://192.168.3.240:8000";
 
 const processingMessages = [
 
@@ -170,6 +178,9 @@ analyzeBtn.addEventListener("click", async () => {
     }
 
     analyzeBtn.disabled = true;
+
+    // Hide previous AI explanation while new invoice is processing
+    aiExplanationAction.style.display = "none";
 
     const formData = new FormData();
     formData.append("file", file);
@@ -236,6 +247,12 @@ analyzeBtn.addEventListener("click", async () => {
 
         const prediction = await predictionPromise;
 
+
+        // Save document ID of current invoice
+        currentDocumentId = prediction.document_id;
+
+        console.log("Current Document ID:", currentDocumentId);
+
         clearInterval(interval);
 
         progressFill.style.width = "100%";
@@ -292,6 +309,9 @@ analyzeBtn.addEventListener("click", async () => {
 
         document.getElementById("invoiceId").textContent =
             data.filename;
+
+        // Show Explain with AI only after prediction is ready
+        aiExplanationAction.style.display = "flex";
 
         analyzeBtn.disabled = false;
 
