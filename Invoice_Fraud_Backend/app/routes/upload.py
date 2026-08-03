@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi import UploadFile
 from fastapi import File
+from app.services.prediction_service import get_prediction
 
 from app.services.s3_service import (
     upload_to_s3,
@@ -30,3 +31,11 @@ def invoice_details(filename: str):
 @router.delete("/invoice/{filename}")
 def remove_invoice(filename: str):
     return delete_invoice(filename)
+
+# ==========================================================
+# GET Prediction
+# ==========================================================
+
+@router.get("/prediction/{image_name}")
+def prediction(image_name: str):
+    return get_prediction(image_name)

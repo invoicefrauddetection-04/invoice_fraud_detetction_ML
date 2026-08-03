@@ -106,6 +106,30 @@ def upload_to_s3(file):
             original_filename=filename
         )
 
+        # return {
+
+        #     "status": "success",
+
+        #     "message": "File Uploaded Successfully",
+
+        #     "filename": filename,
+
+        #     "file_type": file_type,
+
+        #     "extension": extension,
+
+        #     "s3_bucket": bucket,
+
+        #     "s3_key": s3_key,
+
+        #     "converted_images": [
+        #         s3_key
+        #     ],
+
+        #     "json_s3_key": json_response["json_s3_key"]
+
+        # }
+
         return {
 
             "status": "success",
@@ -113,6 +137,8 @@ def upload_to_s3(file):
             "message": "File Uploaded Successfully",
 
             "filename": filename,
+
+            "image_name": os.path.basename(s3_key),
 
             "file_type": file_type,
 
@@ -173,6 +199,31 @@ def upload_to_s3(file):
             original_filename=filename
         )
 
+        image_name = os.path.basename(uploaded_images[0]) 
+
+        # return {
+
+        #     "status": "success",
+
+        #     "message": "File Uploaded Successfully",
+
+        #     "filename": filename,
+
+        #     "file_type": file_type,
+
+        #     "extension": extension,
+
+        #     "s3_bucket": bucket,
+
+        #     "s3_key": pdf_s3_key,
+
+        #     #"converted_images": uploaded_images,
+        #     "image_name": os.path.basename(s3_key),
+
+        #     "json_s3_key": json_response["json_s3_key"]
+
+        # }  
+
         return {
 
             "status": "success",
@@ -180,6 +231,8 @@ def upload_to_s3(file):
             "message": "File Uploaded Successfully",
 
             "filename": filename,
+
+            "image_name": image_name,
 
             "file_type": file_type,
 
