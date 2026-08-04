@@ -2,37 +2,37 @@ from database.scripts.db_connection import get_connection
 from database.scripts.s3_connection import list_all_images
 from database.scripts.aws_config import *
 
+
 def insert_uploaded_documents():
 
     images = list_all_images()
 
     if not images:
         print("No images found in S3.")
-        return
+        return None
 
     conn = get_connection()
-
     cur = conn.cursor()
 
     inserted = 0
+    latest_document_id = None
 
     for image in images:
 
         object_key = image["Key"]
 
-        # Skip folder entry
+        # Skip folder entries
         if object_key.endswith("/"):
             continue
 
         image_name = object_key.split("/")[-1]
 
-        # Extract page number if filename contains page_x
         try:
             page_number = int(
                 image_name.split("_")[-1]
                 .replace(".jpg", "")
-                .replace(".png", "")
                 .replace(".jpeg", "")
+                .replace(".png", "")
             )
         except:
             page_number = 1
@@ -51,7 +51,11 @@ def insert_uploaded_documents():
         )
         VALUES
         (%s,%s,%s,%s,%s,%s)
-        ON CONFLICT (object_key) DO NOTHING;
+
+        ON CONFLICT (object_key)
+        DO NOTHING
+
+        RETURNING document_id;
         """
 
         cur.execute(
@@ -61,30 +65,31 @@ def insert_uploaded_documents():
             (
 
                 image_name,
-
                 page_number,
-
                 BUCKET_NAME,
-
                 object_key,
-
                 upload_time,
-
                 "UPLOADED"
 
             )
 
         )
 
-        inserted += 1
+        row = cur.fetchone()
+
+        if row:
+
+            latest_document_id = row[0]
+            inserted += 1
 
     conn.commit()
 
     cur.close()
-
     conn.close()
 
     print(f"{inserted} images inserted successfully.")
+
+    return latest_document_id
 
 
 # ----------------------------------------------------
@@ -93,9 +98,11 @@ def insert_uploaded_documents():
 
 def process_uploaded_documents():
 
-    insert_uploaded_documents()
+    return insert_uploaded_documents()
 
 
 if __name__ == "__main__":
 
-    process_uploaded_documents()
+    document_id = process_uploaded_documents()
+
+    print(f"\nLatest Document ID : {document_id}")

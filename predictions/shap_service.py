@@ -5,11 +5,7 @@ import pandas as pd
 from database.scripts.db_connection import get_connection
 
 from predictions.predictor import predict_invoice
-
-from predictions.load_model import (
-    model,
-    preprocessor
-)
+from predictions.load_model import model, preprocessor
 
 # ----------------------------------------------------
 # Initialize SHAP Explainer
@@ -20,42 +16,10 @@ explainer = shap.TreeExplainer(model)
 feature_names = preprocessor.get_feature_names_out()
 
 feature_names = [
-
     col.replace("remainder__", "")
        .replace("onehot__", "")
-
     for col in feature_names
-
 ]
-
-# ----------------------------------------------------
-# Get Predicted Documents
-# ----------------------------------------------------
-
-def get_predicted_documents():
-
-    conn = get_connection()
-    cur = conn.cursor()
-
-    query = """
-       SELECT document_id
-       FROM uploaded_documents
-       WHERE processing_status = 'PREDICTED'
-       AND upload_timestamp = (
-                                SELECT MAX(upload_timestamp)
-                                FROM uploaded_documents
-                                WHERE processing_status = 'PREDICTED'
-       );
-    """
-
-    cur.execute(query)
-
-    rows = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    return rows
 
 # ----------------------------------------------------
 # Generate SHAP
@@ -69,18 +33,16 @@ def generate_shap(feature_df):
         processed_features = processed_features.toarray()
 
     processed_df = pd.DataFrame(
-
         processed_features,
-
         columns=feature_names
-
     )
 
     shap_values = explainer.shap_values(processed_df)
 
+    # LightGBM returns list
     if isinstance(shap_values, list):
-        shap_values = shap_values[0]
-
+        shap_values = shap_values[-1]
+        
     explanation = shap.Explanation(
 
         values=shap_values[0],
@@ -95,61 +57,37 @@ def generate_shap(feature_df):
 
     return processed_df, shap_values, explanation
 
+
 # ----------------------------------------------------
 # Get Top SHAP Features
 # ----------------------------------------------------
 
-def get_top_features(
-
-    processed_df,
-
-    shap_values,
-
-    top_n=3
-
-):
+def get_top_features(processed_df, shap_values, top_n=3):
 
     shap_df = pd.DataFrame({
 
-        "feature_name":
+        "feature_name": processed_df.columns,
 
-            processed_df.columns,
+        "feature_value": processed_df.iloc[0].values,
 
-        "feature_value":
-
-            processed_df.iloc[0].values,
-
-        "shap_value":
-
-            shap_values[0]
+        "shap_value": shap_values[0]
 
     })
 
-    shap_df["importance_score"] = (
-
-        shap_df["shap_value"].abs()
-
-    )
+    shap_df["importance_score"] = shap_df["shap_value"].abs()
 
     shap_df = (
-
         shap_df
-
         .sort_values(
-
             "importance_score",
-
             ascending=False
-
         )
-
         .head(top_n)
-
         .reset_index(drop=True)
-
     )
 
     return shap_df
+
 
 # ----------------------------------------------------
 # Save SHAP Explanation
@@ -171,26 +109,24 @@ def save_shap(
 
 ):
 
+    # Replace NaN with None for JSONB compatibility
+    top_features = top_features.where(
+        pd.notnull(top_features),
+        None
+    )
+
     query = """
 
         INSERT INTO shap_explanations
-
         (
-
             document_id,
-
             prediction,
-
             fraud_probability,
-
             base_value,
-
             top_features
-
         )
 
         VALUES
-
         (%s,%s,%s,%s,%s)
 
         ON CONFLICT (document_id)
@@ -219,18 +155,14 @@ def save_shap(
 
             prediction,
 
-            round(fraud_probability,5),
+            round(fraud_probability, 5),
 
-            base_value,
+            float(base_value),
 
             json.dumps(
-
                 top_features.to_dict(
-
                     orient="records"
-
                 )
-
             )
 
         )
@@ -243,21 +175,16 @@ def save_shap(
 
         "prediction": prediction,
 
-        "fraud_probability": round(fraud_probability,5)
+        "fraud_probability": round(fraud_probability, 5)
 
     }
+
 
 # ----------------------------------------------------
 # Update Processing Status
 # ----------------------------------------------------
 
-def update_processing_status(
-
-    cur,
-
-    document_id
-
-):
+def update_processing_status(cur, document_id):
 
     query = """
 
@@ -269,108 +196,93 @@ def update_processing_status(
 
     """
 
-    cur.execute(
+    cur.execute(query, (document_id,))
 
-        query,
 
-        (document_id,)
+# ----------------------------------------------------
+# Pipeline Function
+# ----------------------------------------------------
 
-    )
-
-    # ----------------------------------------------------
-    # Pipeline Function
-    # ----------------------------------------------------
-
-def process_shap():
-
-    rows = get_predicted_documents()
-
-    if not rows:
-
-        print("No documents ready for SHAP generation.")
-
-        return
+def process_shap(document_id):
 
     conn = get_connection()
-
     cur = conn.cursor()
 
     try:
 
-        for (document_id,) in rows:
+        print("\n===================================")
+        print(f"Processing Document : {document_id}")
+        print("===================================")
 
-            try:
+        # Prediction + Features
+        prediction, fraud_probability, feature_df = predict_invoice(
+            document_id
+        )
 
-                print("\n===================================")
-                print(f"Processing Document : {document_id}")
-                print("===================================")
+        # Generate SHAP
+        processed_df, shap_values, explanation = generate_shap(
+            feature_df
+        )
 
-                # Prediction + Feature Data
-                prediction, fraud_probability, feature_df = predict_invoice(
-                    document_id
-                )
+        # Top Features
+        top_features = get_top_features(
+            processed_df,
+            shap_values
+        )
 
-                # Generate SHAP
-                processed_df, shap_values, explanation = generate_shap(
-                    feature_df
-                )
+        # Save SHAP
+        result = save_shap(
 
-                # Top Features
-                top_features = get_top_features(
+            cur,
 
-                    processed_df,
+            document_id,
 
-                    shap_values
+            prediction,
 
-                )
+            fraud_probability,
 
-                # Save
-                result = save_shap(
+            explanation.base_values,
 
-                    cur,
+            top_features
 
-                    document_id,
+        )
 
-                    prediction,
-
-                    fraud_probability,
-
-                    float(explanation.base_values),
-
-                    top_features
-
-                )
-
-                # Update Status
-                update_processing_status(
-
-                    cur,
-
-                    document_id
-
-                )
-
-                print("\n✓ SHAP Explanation Saved")
-
-                print(result)
-
-            except Exception as e:
-
-                print(f"\n✗ Failed for Document {document_id}")
-
-                print(e)
-
-                continue
+        # Update Status
+        update_processing_status(
+            cur,
+            document_id
+        )
 
         conn.commit()
 
-        print("\n===================================")
-        print("All SHAP Explanations Generated.")
-        print("===================================")
+        print("\n✓ SHAP Explanation Saved")
+        print(result)
+
+    except Exception as e:
+
+        conn.rollback()
+
+        print(f"\n✗ Failed for Document {document_id}")
+        print(e)
 
     finally:
 
         cur.close()
-
         conn.close()
 
+'''
+# ----------------------------------------------------
+# Testing Block
+# ----------------------------------------------------
+
+if __name__ == "__main__":
+
+    try:
+
+        document_id = int(input("Enter Document ID: "))
+        process_shap(document_id)
+
+    except ValueError:
+
+        print("Please enter a valid Document ID.")
+'''

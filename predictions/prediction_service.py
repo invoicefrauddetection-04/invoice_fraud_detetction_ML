@@ -2,10 +2,7 @@ from datetime import datetime
 
 from database.scripts.db_connection import get_connection
 
-from predictions.predictor import (
-    predict_invoice,
-    get_feature_generated_documents
-)
+from predictions.predictor import predict_invoice
 
 
 # ----------------------------------------------------------
@@ -44,39 +41,32 @@ def save_prediction(cur, document_id):
             prediction_timestamp = EXCLUDED.prediction_timestamp;
     """
 
+    model_name = "LightGBM"
+
     cur.execute(
-
         query,
-
         (
-
             document_id,
-
             prediction,
-
             probability,
-
-            "LightGBM",
-
+            model_name,
             datetime.now()
-
         )
-
     )
 
     return {
 
-    "document_id": document_id,
+        "document_id": document_id,
 
-    "prediction": prediction,
+        "prediction": prediction,
 
-    "fraud_probability": round(probability,4),
+        "fraud_probability": round(probability, 4),
 
-    "model_name": "XGBoost",
+        "model_name": model_name,
 
-    "feature_df": feature_df
+        "feature_df": feature_df
 
-}
+    }
 
 
 # ----------------------------------------------------------
@@ -98,61 +88,57 @@ def update_processing_status(cur, document_id):
 # Pipeline Function
 # ----------------------------------------------------------
 
-def process_predictions():
-
-    rows = get_feature_generated_documents()
-
-    if not rows:
-
-        print("No documents ready for prediction.")
-
-        return
+def process_predictions(document_id):
 
     conn = get_connection()
     cur = conn.cursor()
 
     try:
 
-        for (document_id,) in rows:
+        print("\n===================================")
+        print(f"Processing Document : {document_id}")
+        print("===================================")
 
-            try:
+        result = save_prediction(
+            cur,
+            document_id
+        )
 
-                print("\n===================================")
-                print(f"Processing Document : {document_id}")
-                print("===================================")
-
-                result = save_prediction(
-                    cur,
-                    document_id
-                )
-
-                update_processing_status(
-                    cur,
-                    document_id
-                )
-
-                print("\nPrediction Saved Successfully")
-                print(result)
-
-            except Exception as e:
-
-                print(f"\n✗ Failed for Document {document_id}")
-                print(e)
-
-                continue
+        update_processing_status(
+            cur,
+            document_id
+        )
 
         conn.commit()
 
-        print("\n===================================")
-        print("All predictions completed.")
-        print("===================================")
+        print("\nPrediction Saved Successfully")
+        print(result)
+
+    except Exception as e:
+
+        conn.rollback()
+
+        print(f"\n✗ Failed for Document {document_id}")
+        print(e)
 
     finally:
 
         cur.close()
         conn.close()
 
+'''
+# ----------------------------------------------------------
+# Testing Block
+# ----------------------------------------------------------
 
 if __name__ == "__main__":
 
-    process_predictions()
+    try:
+
+        document_id = int(input("Enter Document ID: "))
+        process_predictions(document_id)
+
+    except ValueError:
+
+        print("Please enter a valid Document ID.")
+'''

@@ -80,31 +80,6 @@ def get_submission_hour(document_id):
     return uploaded_timestamp.hour
 
 #-----------------------------------
-# Get OCR Completed Documents
-#-----------------------------------
-
-def get_ocr_completed_documents():
-
-    conn = get_connection()
-    cur = conn.cursor()
-
-    query = """
-        SELECT document_id
-        FROM uploaded_documents
-        WHERE processing_status = 'OCR_COMPLETED'
-        ORDER BY document_id;
-    """
-
-    cur.execute(query)
-
-    rows = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    return rows
-
-#-----------------------------------
 # Compute Global Statistics
 #-----------------------------------
 
@@ -359,43 +334,35 @@ if __name__ == "__main__":
 # Pipeline Function
 # ----------------------------------------------------
 
-def process_features():
+def process_features(document_id):
 
-    rows = get_ocr_completed_documents()
+    try:
 
-    if not rows:
+        print("\n===================================")
+        print(f"Processing Document : {document_id}")
+        print("===================================")
 
-        print("No OCR completed documents found.")
+        feature_df = prepare_features(document_id)
 
-        return
+        print("\nGenerated Features\n")
+        print(feature_df)
 
-    for (document_id,) in rows:
+        update_processing_status(document_id)
 
-        try:
+        print(f"\n✓ Features generated for Document {document_id}")
 
-            print("\n===================================")
-            print(f"Processing Document : {document_id}")
-            print("===================================")
+    except Exception as e:
 
-            feature_df = prepare_features(document_id)
+        print(f"\n✗ Failed for Document {document_id}")
+        print(e)
 
-            print("\nGenerated Features\n")
-
-            print(feature_df)
-
-            update_processing_status(document_id)
-
-            print(f"\n✓ Features generated for Document {document_id}")
-
-        except Exception as e:
-
-            print(f"\n✗ Failed for Document {document_id}")
-
-            print(e)
-
-            continue
-
-
+'''
 if __name__ == "__main__":
 
-    process_features()
+    try:
+        document_id = int(input("Enter Document ID: "))
+        process_features(document_id)
+
+    except ValueError:
+        print("Please enter a valid numeric Document ID.")
+'''
