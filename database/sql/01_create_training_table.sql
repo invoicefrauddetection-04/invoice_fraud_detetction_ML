@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS training_in
+DROP TABLE IF EXISTS training_invoices
 
 CREATE TABLE training_invoices (
     record_id SERIAL PRIMARY KEY,

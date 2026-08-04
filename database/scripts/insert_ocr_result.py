@@ -115,6 +115,10 @@ def insert_ocr_result(bucket_name):
             print(f"Image Name : {image_name}")
             print(f"OCR JSON   : {object_key}")
 
+            print("\nTrying to fetch S3 object:")
+            print(f"Bucket : {bucket_name}")
+            print(f"Key    : {object_key}")
+            
             # Read OCR JSON from S3
             ocr_json = read_json_from_s3(
                 bucket_name,
