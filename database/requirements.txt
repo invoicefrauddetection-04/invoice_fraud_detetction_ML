@@ -1,0 +1,9 @@
+python-dotenv==1.2.2
+scikit-learn==1.6.1
+xgboost==3.3.0
+pandas==2.2.2
+numpy==2.0.2
+seaborn==0.13.2
+joblib==1.5.3
+boto3==1.43.56
+psycopg2-binary==2.9.12
