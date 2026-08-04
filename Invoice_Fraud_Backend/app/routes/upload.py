@@ -3,6 +3,8 @@ from fastapi import UploadFile
 from fastapi import File
 from app.services.prediction_service import get_prediction
 from app.services.context_service import get_invoice_context
+from app.services.pipeline_service import execute_pipeline
+
 
 from app.services.s3_service import (
     upload_to_s3,
@@ -13,10 +15,28 @@ from app.services.s3_service import (
 
 router = APIRouter()
 
+'''
+@router.post("/upload")
+async def upload_invoice(file: UploadFile = File(...)):
+    return upload_to_s3(file) ''' 
 
 @router.post("/upload")
 async def upload_invoice(file: UploadFile = File(...)):
-    return upload_to_s3(file)
+
+    # Upload invoice
+    upload_response = upload_to_s3(file)
+
+    # If upload failed, return immediately
+    if upload_response.get("status") != "success":
+        return upload_response
+
+    # Execute pipeline
+    pipeline_response = execute_pipeline()
+
+    return {
+        "upload": upload_response,
+        "pipeline": pipeline_response
+    }
 
 
 @router.get("/invoices")

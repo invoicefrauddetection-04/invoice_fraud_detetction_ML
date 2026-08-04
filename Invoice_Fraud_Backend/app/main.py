@@ -1,36 +1,35 @@
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
+# Routers
 from app.routes.upload import router as upload_router
+from app.routes.llm import router as llm_router
 
 app = FastAPI(
     title="Invoice Fraud Detection API",
-    version="1.0"
+    version="1.0.0"
 )
 
-'''app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5500",
-        "http://localhost:5500",
-        "http://192.168.2.214:5000",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)'''
-
+# -------------------------------------------------------
+# CORS Configuration
+# -------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],      # Change to specific frontend URL in production
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# -------------------------------------------------------
+# Register Routes
+# -------------------------------------------------------
 app.include_router(upload_router)
+app.include_router(llm_router)
 
-
+# -------------------------------------------------------
+# Root Endpoint
+# -------------------------------------------------------
 @app.get("/")
 def home():
     return {
