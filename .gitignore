@@ -23,4 +23,20 @@ env/
 
 # OS Files
 .DS_Store
-Thumbs.db
+Thumbs.db 
+
+# Local folders
+Datasets/
+Phase_CloudStorage/
+RAG_LLM_Section/
+
+# Zip files
+*.zip
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.env
