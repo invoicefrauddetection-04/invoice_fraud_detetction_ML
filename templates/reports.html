@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="reports-placeholder">
+
+    <div class="report-icon">
+        <i class="fa-solid fa-file-lines"></i>
+    </div>
+
+    <h2>Reports</h2>
+
+    <p>
+        Generate and download comprehensive fraud analysis reports after invoices
+        have been processed by the AI Fraud Detection module.
+    </p>
+
+    <a href="{{ url_for('fraud_detection') }}" class="primary-btn">
+    <i class="fa-solid fa-arrow-right"></i>
+    Go to Fraud Detection
+</a>
+
+</div>
+
+{% endblock %}

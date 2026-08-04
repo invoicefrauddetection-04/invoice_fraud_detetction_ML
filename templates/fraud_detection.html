@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ================= Workflow ================= -->
+
+<section class="workflow-card card">
+
+    <h2>
+        <i class="fa-solid fa-diagram-project"></i>
+        Analysis Workflow
+    </h2>
+
+    <div class="workflow-steps">
+
+        <div class="workflow-step active" id="step-upload">
+
+            <div class="step-circle">
+
+                <i class="fa-solid fa-file-arrow-up"></i>
+
+            </div>
+
+            <h4>Upload Invoice</h4>
+
+            <p>Select PDF or Image</p>
+
+        </div>
+
+        <div class="workflow-line"></div>
+
+        <div class="workflow-step" id="step-processing">
+
+            <div class="step-circle">
+
+                <i class="fa-solid fa-microchip"></i>
+
+            </div>
+
+            <h4>AI Processing</h4>
+
+            <p>OCR + ML Analysis</p>
+
+        </div>
+
+        <div class="workflow-line"></div>
+
+        <div class="workflow-step" id="step-result">
+
+            <div class="step-circle">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+            </div>
+
+            <h4>Prediction</h4>
+
+            <p>Fraud Risk Score</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="fraud-container">
+
+    <!-- Upload Card -->
+
+    <div class="upload-card card">
+        <h2>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Upload Invoice
+        </h2>
+        <div class="upload-area" id="dropArea">
+
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            <h3>Drag & Drop Invoice</h3>
+
+            <p>PDF, PNG or JPEG</p>
+
+            <input
+                type="file"
+                id="invoiceInput"
+                accept=".pdf,.png,.jpg,.jpeg"
+                hidden>
+
+            <button id="browseBtn" class="primary-btn">
+
+                Browse Files
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Preview Card -->
+
+    <div class="preview-card card">
+
+        <h2>
+        <i class="fa-solid fa-eye"></i>
+        Invoice Preview
+        </h2>
+
+        <div id="previewContainer">
+
+            <div class="preview-placeholder">
+
+                <i class="fa-regular fa-file"></i>
+
+                <p>No Invoice Selected</p>
+                <p>Upload an invoice to preview it here.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= Analyze Section ================= -->
+
+<section class="analyze-card card">
+
+    <div class="analyze-content">
+
+        <i class="fa-solid fa-brain analyze-icon"></i>
+
+        <h2>Ready for Analysis?</h2>
+
+        <p>
+            Upload an invoice and start AI-powered fraud detection using OCR,
+            Machine Learning, and Explainable AI.
+        </p>
+
+        <button id="analyzeBtn" class="analyze-btn" disabled>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Analyze Invoice
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ================= AI Processing ================= -->
+
+<section id="processingCard" class="processing-card card" style="display: none;">
+
+    <div class="processing-content">
+
+        <i class="fa-solid fa-robot processing-icon"></i>
+
+        <h2>AI Analysis in Progress</h2>
+
+        <p id="processingStatus">
+            Initializing AI Engine...
+        </p>
+
+        <div class="progress-bar">
+
+            <div id="progressFill" class="progress-fill"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Prediction Result ================= -->
+
+<section id="predictionCard" class="prediction-card card" style="display: none;">
+
+    <div class="prediction-header">
+
+        <i class="fa-solid fa-shield-halved"></i>
+        <h2>Prediction Result</h2>
+
+    </div>
+
+    <div class="prediction-content">
+
+        <!-- <div id="predictionBadge" class="prediction-badge fraud">
+
+            Fraud Detected
+
+        </div> -->
+
+        <div id="predictionBadge" class="prediction-badge">
+            Prediction
+        </div>
+
+        <div class="prediction-grid">
+
+            <div class="prediction-item">
+
+                <h3>Confidence</h3>
+                <p id="confidenceValue">96.42%</p>
+
+            </div>
+
+            <div class="prediction-item">
+
+                <h3>Risk Level</h3>
+                <p id="riskLevel">High</p>
+
+            </div>
+
+            <div class="prediction-item">
+
+                <h3>Invoice ID</h3>
+                <p id="invoiceId">INV-2026-001</p>
+
+            </div>
+
+        </div>
+
+        <!-- ================= AI Explanation ================= -->
+
+        <!-- <div id="aiExplanationAction"
+            class="ai-explanation-action"
+            style="display: none;">
+
+            <div class="ai-explanation-text">
+
+                <h3>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Want to understand this prediction?
+                </h3>
+
+                <p>
+                    Ask our AI Fraud Assistant to explain the factors
+                    behind this result.
+                </p>
+
+            </div>
+
+            <button id="explainAiBtn" class="explain-ai-btn">
+                <i class="fa-solid fa-comments"></i>
+                Explain with AI
+            </button>
+
+        </div> -->
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/fraud_detection.js') }}"></script>
+{% endblock %}

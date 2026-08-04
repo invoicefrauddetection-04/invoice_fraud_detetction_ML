@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard fade-in">
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero-section">
+
+        <div class="hero-left">
+
+            <h1>
+                Welcome Back, Administrator 👋
+            </h1>
+
+            <p>
+                Monitor procurement activities, detect invoice fraud,
+                analyze supplier risks, and gain AI-powered insights
+                from a single intelligent platform.
+            </p>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="hero-date">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>July 27, 2026</span>
+
+            </div>
+
+            <button class="btn btn-primary">
+
+                <i class="fa-solid fa-file-arrow-up"></i>
+
+                Analyze New Invoice
+
+            </button>
+
+        </div>
+
+    </section>
+
+   <!-- ================= Platform Features ================= -->
+
+<!-- ================= Explore Modules ================= -->
+
+<section class="features-section">
+
+    <div class="section-title">
+        <h2>Explore Modules</h2>
+        <p>
+            Access the core modules of ProcureGuard AI to analyze invoices,
+            investigate fraud predictions, generate reports, and explore
+            procurement insights.
+        </p>
+    </div>
+
+    <div class="features-grid">
+
+        <!-- Fraud Detection -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>Fraud Detection</h3>
+
+            <p>
+                Analyze procurement invoices using AI-powered fraud detection
+                and identify potential fraudulent activities.
+            </p>
+
+            <a href="{{ url_for('fraud_detection') }}">
+                Open Module →
+            </a>
+
+        </div>
+
+        <!-- Business Analytics -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <h3>Business Analytics</h3>
+
+            <p>
+                Explore procurement trends, risk patterns, and business insights
+                generated from processed invoice data.
+            </p>
+
+            <a href="{{ url_for('analytics') }}">
+                Open Module →
+            </a>
+
+        </div>
+
+        <!-- AI Investigator -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <h3>AI Investigator</h3>
+
+            <p>
+                Interact with the AI assistant to understand fraud predictions,
+                investigate suspicious invoices, and receive explainable insights.
+            </p>
+
+            <a href="{{ url_for('ai') }}">
+                Open Module →
+            </a>
+
+        </div>
+
+        <!-- Reports -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <h3>Reports</h3>
+
+            <p>
+                Generate comprehensive fraud analysis reports for auditing,
+                documentation, and decision support.
+            </p>
+
+            <a href="{{ url_for('reports') }}">
+                Open Module →
+            </a>
+
+        </div>
+
+        <!-- About -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+            <h3>About</h3>
+
+            <p>
+                Learn about ProcureGuard AI, its objectives, workflow,
+                technologies, and system architecture.
+            </p>
+
+            <a href="{{ url_for('about') }}">
+                Open Module →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
