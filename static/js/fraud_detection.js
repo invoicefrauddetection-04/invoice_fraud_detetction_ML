@@ -151,7 +151,7 @@ const progressFill = document.getElementById("progressFill");
 
 // Backend URL
 // change the IP here to your backend server's IP address
-const API_BASE_URL = "http://192.168.3.240:8000";
+const API_BASE_URL = "http://192.168.2.31:8000";
 
 const processingMessages = [
 
@@ -180,7 +180,9 @@ analyzeBtn.addEventListener("click", async () => {
     analyzeBtn.disabled = true;
 
     // Hide previous AI explanation while new invoice is processing
+    if (aiExplanationAction) {
     aiExplanationAction.style.display = "none";
+}
 
     const formData = new FormData();
     formData.append("file", file);
@@ -252,6 +254,11 @@ analyzeBtn.addEventListener("click", async () => {
         currentDocumentId = prediction.document_id;
 
         console.log("Current Document ID:", currentDocumentId);
+
+        localStorage.setItem(
+        "currentDocumentId",
+        currentDocumentId
+        );
 
         clearInterval(interval);
 

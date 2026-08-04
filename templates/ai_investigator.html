@@ -2,41 +2,101 @@
 
 {% block content %}
 
-<div class="investigator-placeholder">
+<div class="investigator-container">
 
-    <div class="ai-icon">
-        <i class="fa-solid fa-robot"></i>
+    <!-- Header -->
+    <!-- <div class="investigator-header">
+
+        <div class="ai-icon">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+
+        <div>
+            <h2>AI Investigator</h2>
+            <p>
+                Ask questions about your latest analyzed invoice and understand
+                its fraud-risk assessment.
+            </p>
+        </div>
+
+    </div> -->
+
+
+    <!-- No Invoice State -->
+    <div id="noInvoiceState" class="no-invoice-state" style="display: none;">
+
+        <p>
+            Analyze an invoice first to begin an AI-powered investigation.
+        </p>
+
+        <a href="{{ url_for('fraud_detection') }}" class="primary-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            Go to Fraud Detection
+        </a>
+
     </div>
 
-    <h2>AI Investigator</h2>
 
-    <p>
-        Interact with your AI assistant to understand fraud predictions, investigate
-        suspicious invoices, and receive explainable insights.
-    </p>
+    <!-- Investigator Chat -->
+    <div id="investigatorChat" class="investigator-chat">
 
-    <div class="chat-placeholder">
+        <!-- Current document -->
+        <div class="investigation-context">
+            <i class="fa-solid fa-file-invoice"></i>
 
-        <input
-            type="text"
-            placeholder="Ask a question about an analyzed invoice..."
-            disabled>
+            <span>
+                Investigating latest analyzed invoice
+            </span>
 
-        <button disabled>
-            <i class="fa-solid fa-paper-plane"></i>
-        </button>
+            <span id="documentIdDisplay"></span>
+        </div>
+
+
+        <!-- Messages -->
+        <div id="chatMessages" class="chat-messages">
+
+            <div class="message assistant-message">
+                <div class="message-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+
+                <div class="message-content">
+                    Ask me anything about the fraud assessment of this invoice.
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Input -->
+        <div class="chat-input-area">
+
+            <input
+                id="investigatorInput"
+                type="text"
+                placeholder="Ask about this invoice..."
+                autocomplete="off"
+            >
+
+            <button id="investigatorSendBtn" type="button">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+
+        </div>
 
     </div>
-
-    <small>
-        Analyze an invoice first to enable AI-powered investigation.
-    </small>
-
-    <a href="{{ url_for('fraud_detection') }}" class="primary-btn">
-        <i class="fa-solid fa-arrow-right"></i>
-        Go to Fraud Detection
-    </a>
 
 </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/ai-investigator.js') }}"></script>
 
 {% endblock %}
