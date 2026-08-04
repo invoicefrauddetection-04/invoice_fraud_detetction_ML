@@ -1,0 +1,2902 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0512.1636                               -->
+<workbook original-version='18.1' source-build='2026.1.2 (20261.26.0512.1636)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <_.fcp.DashboardRoundedCorners.true...DashboardRoundedCorners />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location id='AI-PoweredProcurementInvoiceFraudDetection' path='/workbooks' revision='1.2' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+    <color-palette custom='true' name='palette_1' type='regular'>
+      <color>#16a34a</color>
+      <color>#dc2626</color>
+    </color-palette>
+  </preferences>
+  <datasources>
+    <datasource caption='training_invoices' inline='true' name='federated.1q1txzt0lri11915ldsyq00jffgo' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='training_invoices' name='textscan.0h14txa0e5fpv511tx8h30tqucs4'>
+            <connection class='textscan' directory='C:/Users/Amaan/OneDrive/ドキュメント/My Tableau Repository/Datasources' filename='training_invoices.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.0h14txa0e5fpv511tx8h30tqucs4' name='training_invoices.csv' table='[training_invoices#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='supplier_id' ordinal='0' />
+            <column datatype='real' name='invoice_amount' ordinal='1' />
+            <column datatype='string' name='payment_terms' ordinal='2' />
+            <column datatype='string' name='invoice_type' ordinal='3' />
+            <column datatype='integer' name='submission_hour' ordinal='4' />
+            <column datatype='real' name='supplier_invoice_count_30d' ordinal='5' />
+            <column datatype='real' name='supplier_avg_amount_90d' ordinal='6' />
+            <column datatype='real' name='invoice_amount_zscore' ordinal='7' />
+            <column datatype='integer' name='late_night_submission_flag' ordinal='8' />
+            <column datatype='integer' name='is_fraud' ordinal='9' />
+            <column datatype='string' name='supplier_country' ordinal='10' />
+            <column datatype='integer' name='supplier_age_days' ordinal='11' />
+            <column datatype='real' name='supplier_risk_score' ordinal='12' />
+            <column datatype='integer' name='blacklisted_flag' ordinal='13' />
+            <column datatype='real' name='avg_invoice_amount' ordinal='14' />
+            <column datatype='string' name='region' ordinal='15' />
+            <column datatype='real' name='annual_budget' ordinal='16' />
+            <column datatype='integer' name='invoice_month' ordinal='17' />
+            <column datatype='integer' name='invoice_weekday' ordinal='18' />
+            <column datatype='integer' name='invoice_quarter' ordinal='19' />
+            <column datatype='integer' name='is_weekend' ordinal='20' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;₹&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[supplier_id]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_amount</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[invoice_amount]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_amount</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>payment_terms</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[payment_terms]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>payment_terms</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[invoice_type]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_type</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>submission_hour</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[submission_hour]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>submission_hour</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_invoice_count_30d</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[supplier_invoice_count_30d]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_invoice_count_30d</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_avg_amount_90d</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[supplier_avg_amount_90d]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_avg_amount_90d</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_amount_zscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[invoice_amount_zscore]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_amount_zscore</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>late_night_submission_flag</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[late_night_submission_flag]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>late_night_submission_flag</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>is_fraud</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[is_fraud]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>is_fraud</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[supplier_country]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_country</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_age_days</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[supplier_age_days]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_age_days</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>supplier_risk_score</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[supplier_risk_score]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>supplier_risk_score</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>blacklisted_flag</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[blacklisted_flag]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>blacklisted_flag</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>avg_invoice_amount</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[avg_invoice_amount]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>avg_invoice_amount</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>region</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[region]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>region</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>annual_budget</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[annual_budget]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>annual_budget</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_month</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[invoice_month]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_month</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_weekday</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[invoice_weekday]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_weekday</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>invoice_quarter</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[invoice_quarter]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>invoice_quarter</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>is_weekend</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[is_weekend]</local-name>
+            <parent-name>[training_invoices.csv]</parent-name>
+            <remote-alias>is_weekend</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Total Procurement Invoices' datatype='integer' name='[Calculation_0279306175176704]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT([supplier_id])' />
+      </column>
+      <column caption='Fraudulent Invoices' datatype='integer' name='[Calculation_0279306175422465]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([is_fraud])' />
+      </column>
+      <column caption='Fraud Rate %' datatype='real' default-format='p0.00%' name='[Calculation_0279306175578114]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([is_fraud])/COUNT([supplier_id])' />
+      </column>
+      <column caption='Blacklisted Supplier Invoices' datatype='integer' name='[Calculation_0279306175913987]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([blacklisted_flag])' />
+      </column>
+      <column caption='Average Supplier Risk Score' datatype='real' default-format='n#,##0.00;-#,##0.00' name='[Calculation_0279306176286724]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG([supplier_risk_score])' />
+      </column>
+      <column caption='training_invoices.csv' datatype='table' name='[__tableau_internal_object_id__].[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]' role='measure' type='quantitative' />
+      <column caption='Annual Budget' datatype='real' name='[annual_budget]' role='measure' type='quantitative' />
+      <column caption='Avg Invoice Amount' datatype='real' name='[avg_invoice_amount]' role='measure' type='quantitative' />
+      <column aggregation='Sum' datatype='integer' name='[blacklisted_flag]' role='dimension' type='ordinal'>
+        <aliases>
+          <alias key='0' value='Not Blacklisted' />
+          <alias key='1' value='Blacklisted' />
+        </aliases>
+      </column>
+      <column caption='Invoice Amount' datatype='real' name='[invoice_amount]' role='measure' type='quantitative' />
+      <column caption='Invoice Amount Zscore' datatype='real' name='[invoice_amount_zscore]' role='measure' type='quantitative' />
+      <column caption='Invoice Month' datatype='integer' name='[invoice_month]' role='dimension' type='quantitative'>
+        <aliases>
+          <alias key='1' value='Jan' />
+          <alias key='2' value='Feb' />
+          <alias key='3' value='Mar' />
+          <alias key='4' value='Apr' />
+          <alias key='5' value='May' />
+          <alias key='6' value='Jun' />
+          <alias key='7' value='Jul' />
+          <alias key='8' value='Aug' />
+          <alias key='9' value='Sep' />
+          <alias key='10' value='Oct' />
+          <alias key='11' value='Nov' />
+          <alias key='12' value='Dec' />
+        </aliases>
+      </column>
+      <column caption='Invoice Quarter' datatype='integer' name='[invoice_quarter]' role='dimension' type='quantitative' />
+      <column caption='Invoice Type' datatype='string' name='[invoice_type]' role='dimension' type='nominal' />
+      <column caption='Invoice Weekday' datatype='integer' name='[invoice_weekday]' role='measure' type='quantitative' />
+      <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+        <aliases>
+          <alias key='0' value='Genuine' />
+          <alias key='1' value='Fraud' />
+        </aliases>
+      </column>
+      <column caption='Is Weekend' datatype='integer' name='[is_weekend]' role='measure' type='quantitative' />
+      <column caption='Late Night Submission Flag' datatype='integer' name='[late_night_submission_flag]' role='measure' type='quantitative' />
+      <column caption='Payment Terms' datatype='string' name='[payment_terms]' role='dimension' type='nominal' />
+      <column caption='Region' datatype='string' name='[region]' role='dimension' type='nominal' />
+      <column caption='Submission Hour' datatype='integer' name='[submission_hour]' role='measure' type='quantitative' />
+      <column caption='Supplier Age Days' datatype='integer' name='[supplier_age_days]' role='measure' type='quantitative' />
+      <column caption='Supplier Avg Amount 90D' datatype='real' name='[supplier_avg_amount_90d]' role='measure' type='quantitative' />
+      <column caption='Supplier Country' datatype='string' name='[supplier_country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Supplier Id' datatype='string' name='[supplier_id]' role='dimension' type='nominal' />
+      <column caption='Supplier Invoice Count 30D' datatype='real' name='[supplier_invoice_count_30d]' role='measure' type='quantitative' />
+      <column caption='Supplier Risk Score' datatype='real' name='[supplier_risk_score]' role='measure' type='quantitative' />
+      <column-instance column='[blacklisted_flag]' derivation='None' name='[none:blacklisted_flag:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[is_fraud]' derivation='None' name='[none:is_fraud:ok]' pivot='key' type='ordinal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/Amaan/AppData/Local/Temp/TableauTemp/#TableauTemp_0dr297003t8mff11il0cg09gu204.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='08/03/2026 01:15:57 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>supplier_id</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[supplier_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_id</remote-alias>
+              <ordinal>0</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>11816</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_amount</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[invoice_amount]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_amount</remote-alias>
+              <ordinal>1</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>278448</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>payment_terms</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[payment_terms]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>payment_terms</remote-alias>
+              <ordinal>2</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[invoice_type]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_type</remote-alias>
+              <ordinal>3</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>submission_hour</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[submission_hour]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>submission_hour</remote-alias>
+              <ordinal>4</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>24</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>supplier_invoice_count_30d</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[supplier_invoice_count_30d]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_invoice_count_30d</remote-alias>
+              <ordinal>5</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>24</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>supplier_avg_amount_90d</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[supplier_avg_amount_90d]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_avg_amount_90d</remote-alias>
+              <ordinal>6</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300000</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_amount_zscore</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[invoice_amount_zscore]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_amount_zscore</remote-alias>
+              <ordinal>7</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>278448</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>late_night_submission_flag</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[late_night_submission_flag]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>late_night_submission_flag</remote-alias>
+              <ordinal>8</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>is_fraud</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[is_fraud]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>is_fraud</remote-alias>
+              <ordinal>9</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>supplier_country</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[supplier_country]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_country</remote-alias>
+              <ordinal>10</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>161</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>supplier_age_days</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[supplier_age_days]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_age_days</remote-alias>
+              <ordinal>11</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>8044</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>supplier_risk_score</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[supplier_risk_score]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>supplier_risk_score</remote-alias>
+              <ordinal>12</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2308</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>blacklisted_flag</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[blacklisted_flag]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>blacklisted_flag</remote-alias>
+              <ordinal>13</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>avg_invoice_amount</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[avg_invoice_amount]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>avg_invoice_amount</remote-alias>
+              <ordinal>14</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>11816</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>region</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[region]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>region</remote-alias>
+              <ordinal>15</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>24</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>annual_budget</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[annual_budget]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>annual_budget</remote-alias>
+              <ordinal>16</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>50</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_month</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[invoice_month]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_month</remote-alias>
+              <ordinal>17</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>12</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_weekday</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[invoice_weekday]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_weekday</remote-alias>
+              <ordinal>18</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>invoice_quarter</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[invoice_quarter]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>invoice_quarter</remote-alias>
+              <ordinal>19</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>is_weekend</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[is_weekend]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>is_weekend</remote-alias>
+              <ordinal>20</ordinal>
+              <family>training_invoices.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-aliased-fields='true' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:is_fraud:ok]' palette='palette_1' type='palette'>
+            <map to='#16a34a'>
+              <bucket>0</bucket>
+            </map>
+            <map to='#dc2626'>
+              <bucket>1</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:blacklisted_flag:ok]' palette='palette_1' type='palette'>
+            <map to='#16a34a'>
+              <bucket>0</bucket>
+            </map>
+            <map to='#dc2626'>
+              <bucket>1</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='training_invoices.csv' id='training_invoices.csv_3B9D81FE51BB412185C5D39B8693741D'>
+            <properties context=''>
+              <relation connection='textscan.0h14txa0e5fpv511tx8h30tqucs4' name='training_invoices.csv' table='[training_invoices#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+                  <column datatype='string' name='supplier_id' ordinal='0' />
+                  <column datatype='real' name='invoice_amount' ordinal='1' />
+                  <column datatype='string' name='payment_terms' ordinal='2' />
+                  <column datatype='string' name='invoice_type' ordinal='3' />
+                  <column datatype='integer' name='submission_hour' ordinal='4' />
+                  <column datatype='real' name='supplier_invoice_count_30d' ordinal='5' />
+                  <column datatype='real' name='supplier_avg_amount_90d' ordinal='6' />
+                  <column datatype='real' name='invoice_amount_zscore' ordinal='7' />
+                  <column datatype='integer' name='late_night_submission_flag' ordinal='8' />
+                  <column datatype='integer' name='is_fraud' ordinal='9' />
+                  <column datatype='string' name='supplier_country' ordinal='10' />
+                  <column datatype='integer' name='supplier_age_days' ordinal='11' />
+                  <column datatype='real' name='supplier_risk_score' ordinal='12' />
+                  <column datatype='integer' name='blacklisted_flag' ordinal='13' />
+                  <column datatype='real' name='avg_invoice_amount' ordinal='14' />
+                  <column datatype='string' name='region' ordinal='15' />
+                  <column datatype='real' name='annual_budget' ordinal='16' />
+                  <column datatype='integer' name='invoice_month' ordinal='17' />
+                  <column datatype='integer' name='invoice_weekday' ordinal='18' />
+                  <column datatype='integer' name='invoice_quarter' ordinal='19' />
+                  <column datatype='integer' name='is_weekend' ordinal='20' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Average Invoice Amount by Invoice Category'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#ffffff' fontname='Segoe UI' fontsize='16'>Average Invoice Amount by Invoice Category</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column-instance column='[invoice_amount]' derivation='Avg' name='[avg:invoice_amount:qk]' pivot='key' type='quantitative' />
+            <column caption='Invoice Amount' datatype='real' name='[invoice_amount]' role='measure' type='quantitative' />
+            <column caption='Invoice Type' datatype='string' name='[invoice_type]' role='dimension' type='nominal' />
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column-instance column='[invoice_type]' derivation='None' name='[none:invoice_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[is_fraud]' derivation='None' name='[none:is_fraud:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]' scope='cols' value='Average Invoice Amount' />
+            <format attr='display' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]' scope='cols' value='false' />
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+            <format attr='tick-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]' value='c&quot;$&quot;#,##0,.0K;(&quot;$&quot;#,##0,.0K)' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_type:nk]' value='10' />
+            <format attr='color' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_type:nk]' value='#374151' />
+            <format attr='font-size' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]' value='10' />
+            <format attr='color' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]' value='#374151' />
+            <format attr='font-family' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_type:nk]' value='Tableau Book' />
+            <format attr='font-weight' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_type:nk]' value='bold' />
+            <format attr='font-family' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]' value='Tableau Book' />
+            <format attr='font-weight' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]' value='bold' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='rows' value='false' />
+          </style-rule>
+          <style-rule element='dropline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='background-color' value='#1e3a5f' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]' />
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true'>&lt;</run>
+                <run bold='true'>[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]</run>
+                <run bold='true'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+              <style-rule element='trendline'>
+                <format attr='stroke-size' value='0' />
+                <format attr='line-visibility' value='off' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_type:nk] / [federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok])</rows>
+        <cols>[federated.1q1txzt0lri11915ldsyq00jffgo].[avg:invoice_amount:qk]</cols>
+      </table>
+      <simple-id uuid='{EDB5C7FE-3E4D-4320-ABB7-B6DA5BD268AC}' />
+    </worksheet>
+    <worksheet name='Average Supplier Risk Score'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='12'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Average Supplier Risk Score' datatype='real' default-format='n#,##0.00;-#,##0.00' name='[Calculation_0279306176286724]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='AVG([supplier_risk_score])' />
+            </column>
+            <column caption='Supplier Risk Score' datatype='real' name='[supplier_risk_score]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_0279306176286724]' derivation='User' name='[usr:Calculation_0279306176286724:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306176286724:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&lt;</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306176286724:qk]</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='vertical-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{16766322-B6FB-47AC-9FC8-8628D305B756}' />
+    </worksheet>
+    <worksheet name='Blacklisted Suppliers'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='13'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Blacklisted Supplier Invoices' datatype='integer' name='[Calculation_0279306175913987]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([blacklisted_flag])' />
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[blacklisted_flag]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Not Blacklisted' />
+                <alias key='1' value='Blacklisted' />
+              </aliases>
+            </column>
+            <column-instance column='[Calculation_0279306175913987]' derivation='User' name='[usr:Calculation_0279306175913987:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175913987:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&lt;</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175913987:qk]</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='vertical-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{DF055CFB-2028-4077-A155-0615F0F4F232}' />
+    </worksheet>
+    <worksheet name='Fraud Rate'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='13'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Fraud Rate %' datatype='real' default-format='p0.00%' name='[Calculation_0279306175578114]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([is_fraud])/COUNT([supplier_id])' />
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column caption='Supplier Id' datatype='string' name='[supplier_id]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_0279306175578114]' derivation='User' name='[usr:Calculation_0279306175578114:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175578114:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&lt;</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175578114:qk]</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='vertical-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{0045AC20-7A98-4BC0-941E-3BD4168C14A1}' />
+    </worksheet>
+    <worksheet name='Fraud by Blacklisted Supplier'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#ffffff' fontname='Segoe UI' fontsize='16'>Fraud by Blacklisted Supplier</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column aggregation='Sum' datatype='integer' name='[blacklisted_flag]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Not Blacklisted' />
+                <alias key='1' value='Blacklisted' />
+              </aliases>
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column-instance column='[blacklisted_flag]' derivation='None' name='[none:blacklisted_flag:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[is_fraud]' derivation='Sum' name='[sum:is_fraud:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='display' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]' scope='cols' value='false' />
+            <format attr='tick-color' value='#00000000' />
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]' value='116' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]' value='10' />
+            <format attr='font-family' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]' value='Segoe UI Semibold' />
+            <format attr='color' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]' value='#374151' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='rows' value='false' />
+          </style-rule>
+          <style-rule element='caption'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='background-color' value='#1e3a5f' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]' />
+              <size column='[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]' />
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]' />
+            </encodings>
+            <reference-line axis-column='[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]' enable-instant-analytics='true' formula='average' id='refline0' label-type='none' probability='95' scope='per-cell' value-column='[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]' z-order='1' />
+            <customized-label>
+              <formatted-text>
+                <run bold='true'>&lt;</run>
+                <run bold='true'>[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]</run>
+                <run bold='true'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]</rows>
+        <cols>[federated.1q1txzt0lri11915ldsyq00jffgo].[sum:is_fraud:qk]</cols>
+      </table>
+      <simple-id uuid='{8A145120-C48F-453B-BFAE-D98977DB1B67}' />
+    </worksheet>
+    <worksheet name='Fraud by Supplier Country'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#ffffff' fontname='Segoe UI' fontsize='16'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Fraudulent Invoices' datatype='integer' name='[Calculation_0279306175422465]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([is_fraud])' />
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column-instance column='[supplier_country]' derivation='None' name='[none:supplier_country:nk]' pivot='key' type='nominal' />
+            <column caption='Supplier Country' datatype='string' name='[supplier_country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[Calculation_0279306175422465]' derivation='User' name='[usr:Calculation_0279306175422465:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]'>
+            <groupfilter count='10' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+              <groupfilter direction='DESC' expression='[Calculation_0279306175422465]' function='order' user:ui-marker='order'>
+                <groupfilter function='level-members' level='[none:supplier_country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[Longitude (generated)]' field-type='quantitative' max='15691837.897603599' min='-12479264.781492302' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[Latitude (generated)]' field-type='quantitative' max='9570221.9433220029' min='-4387368.0454353429' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <format attr='tick-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='dropline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='background-color' value='#1e3a5f' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]' />
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' />
+              <lod column='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]' />
+              <color column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' />
+              <geometry column='[federated.1q1txzt0lri11915ldsyq00jffgo].[Geometry (generated)]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true'><![CDATA[<[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run bold='true'><![CDATA[<[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]>]]></run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+              <style-rule element='trendline'>
+                <format attr='stroke-size' value='0' />
+                <format attr='line-visibility' value='off' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1q1txzt0lri11915ldsyq00jffgo].[Latitude (generated)]</rows>
+        <cols>[federated.1q1txzt0lri11915ldsyq00jffgo].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{B9D9BA39-872E-4144-A710-23A6366A366C}' />
+    </worksheet>
+    <worksheet name='Fraudulent Invoices'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='13'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Fraudulent Invoices' datatype='integer' name='[Calculation_0279306175422465]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([is_fraud])' />
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column-instance column='[Calculation_0279306175422465]' derivation='User' name='[usr:Calculation_0279306175422465:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&lt;</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='vertical-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{AD33ADE0-9233-42FC-9AD0-890C39D6451F}' />
+    </worksheet>
+    <worksheet name='Monthly Fraud Trend'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#ffffff' fontname='Segoe UI' fontsize='16'>Monthly Fraund Trend</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Fraudulent Invoices' datatype='integer' name='[Calculation_0279306175422465]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([is_fraud])' />
+            </column>
+            <column caption='Invoice Month' datatype='integer' name='[invoice_month]' role='dimension' type='quantitative'>
+              <aliases>
+                <alias key='1' value='Jan' />
+                <alias key='2' value='Feb' />
+                <alias key='3' value='Mar' />
+                <alias key='4' value='Apr' />
+                <alias key='5' value='May' />
+                <alias key='6' value='Jun' />
+                <alias key='7' value='Jul' />
+                <alias key='8' value='Aug' />
+                <alias key='9' value='Sep' />
+                <alias key='10' value='Oct' />
+                <alias key='11' value='Nov' />
+                <alias key='12' value='Dec' />
+              </aliases>
+            </column>
+            <column aggregation='Sum' datatype='integer' name='[is_fraud]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='0' value='Genuine' />
+                <alias key='1' value='Fraud' />
+              </aliases>
+            </column>
+            <column-instance column='[invoice_month]' derivation='None' name='[none:invoice_month:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_0279306175422465]' derivation='User' name='[usr:Calculation_0279306175422465:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='display' class='0' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' scope='rows' value='false' />
+            <format attr='tick-color' value='#00000000' />
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-family' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' value='Segoe UI' />
+            <format attr='font-size' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' value='10' />
+            <format attr='color' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' value='#5f6b7a' />
+            <format attr='font-weight' field='[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_month:ok]' value='bold' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='background-color' value='#1e3a5f' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true'>&lt;</run>
+                <run bold='true'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]</run>
+                <run bold='true'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='false' />
+                <format attr='mark-labels-mode' value='range' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175422465:qk]</rows>
+        <cols>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_month:ok]</cols>
+      </table>
+      <simple-id uuid='{1385D482-6DC0-4AA0-B206-D5DDC38407BD}' />
+    </worksheet>
+    <worksheet name='Total Procurement Invoices'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='13'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='training_invoices' name='federated.1q1txzt0lri11915ldsyq00jffgo' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1q1txzt0lri11915ldsyq00jffgo'>
+            <column caption='Total Procurement Invoices' datatype='integer' name='[Calculation_0279306175176704]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNT([supplier_id])' />
+            </column>
+            <column caption='Supplier Id' datatype='string' name='[supplier_id]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_0279306175176704]' derivation='User' name='[usr:Calculation_0279306175176704:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='border-width' value='0' />
+            <format attr='border-style' value='none' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='background-color' value='#ffffff' />
+            <format attr='border-color' value='#d1d5db' />
+            <format attr='border-width' value='0' />
+            <format attr='border-style' value='none' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#ffffff' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' value='0' />
+            <format attr='line-visibility' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Text' />
+            <encodings>
+              <text column='[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175176704:qk]' />
+            </encodings>
+            <customized-label>
+              <formatted-text>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&lt;</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>[federated.1q1txzt0lri11915ldsyq00jffgo].[usr:Calculation_0279306175176704:qk]</run>
+                <run bold='true' fontcolor='#1e3a5f' fontname='Segoe UI' fontsize='28'>&gt;</run>
+              </formatted-text>
+            </customized-label>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='vertical-align' value='center' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{3216C948-A5DB-433E-8ABC-4679B38A99A3}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size sizing-mode='automatic' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone forceUpdate='true' h='8340' id='5' type-v2='text' w='99034' x='483' y='940'>
+            <formatted-text>
+              <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='22'>AI-Powered Procurement Invoice Fraud Detection </run>
+            </formatted-text>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+              <format attr='background-color' value='#1e3a5f' />
+            </zone-style>
+          </zone>
+          <zone h='35707' id='14' param='horz' type-v2='layout-flow' w='52679' x='483' y='28200'>
+            <zone h='35707' id='15' name='Monthly Fraud Trend' w='52679' x='483' y='28200'>
+              <layout-cache cell-count-w='12' minheight='176' type-h='scalable' type-w='cell' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                <format attr='margin' value='6' />
+              </zone-style>
+            </zone>
+          </zone>
+          <zone h='35707' id='16' name='Fraud by Supplier Country' w='46355' x='53162' y='28200'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+            </zone-style>
+          </zone>
+          <zone h='35153' id='17' param='horz' type-v2='layout-flow' w='52679' x='483' y='63907'>
+            <zone h='35153' id='18' name='Average Invoice Amount by Invoice Category' w='52679' x='483' y='63907'>
+              <layout-cache minwidth='280' type-h='fixed' type-w='scalable' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                <format attr='margin' value='6' />
+              </zone-style>
+            </zone>
+          </zone>
+          <zone h='35153' id='19' name='Fraud by Blacklisted Supplier' w='46355' x='53162' y='63907'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+            </zone-style>
+          </zone>
+          <zone h='18920' id='23' param='horz' type-v2='layout-flow' w='20392' x='483' y='9280'>
+            <zone h='18920' id='24' name='Total Procurement Invoices' w='20392' x='483' y='9280'>
+              <layout-cache cell-count-w='1' type-h='cell' type-w='cell' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                <format attr='margin' value='6' />
+                <format attr='background-color' value='#1e3a5f' />
+              </zone-style>
+            </zone>
+          </zone>
+          <zone h='18920' id='25' name='Fraudulent Invoices' w='20640' x='20875' y='9280'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+              <format attr='background-color' value='#1e3a5f' />
+            </zone-style>
+          </zone>
+          <zone h='18920' id='26' name='Fraud Rate' w='21539' x='41515' y='9280'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+              <format attr='background-color' value='#1e3a5f' />
+            </zone-style>
+          </zone>
+          <zone h='18920' id='27' name='Blacklisted Suppliers' w='18769' x='63054' y='9280'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+              <format attr='background-color' value='#1e3a5f' />
+            </zone-style>
+          </zone>
+          <zone h='18920' id='28' name='Average Supplier Risk Score' w='17694' x='81823' y='9280'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+              <format attr='margin' value='6' />
+              <format attr='background-color' value='#1e3a5f' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+            <format attr='background-color' value='#f5f5f5' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='1950' minheight='1950' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='34' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98120' id='33' param='vert' type-v2='layout-flow' w='99034' x='483' y='940'>
+                <zone forceUpdate='true' h='8340' id='5' type-v2='text' w='99034' x='483' y='940'>
+                  <formatted-text>
+                    <run bold='true' fontalignment='1' fontcolor='#ffffff' fontname='Segoe UI' fontsize='22'>AI-Powered Procurement Invoice Fraud Detection </run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='140' h='18920' id='24' is-fixed='true' name='Total Procurement Invoices' w='20392' x='483' y='9280'>
+                  <layout-cache cell-count-w='1' type-h='cell' type-w='cell' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='140' h='18920' id='25' is-fixed='true' name='Fraudulent Invoices' w='20640' x='20875' y='9280'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='140' h='18920' id='26' is-fixed='true' name='Fraud Rate' w='21539' x='41515' y='9280'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='140' h='18920' id='27' is-fixed='true' name='Blacklisted Suppliers' w='18769' x='63054' y='9280'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='140' h='18920' id='28' is-fixed='true' name='Average Supplier Risk Score' w='17694' x='81823' y='9280'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                    <format attr='background-color' value='#1e3a5f' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='273' h='35707' id='15' is-fixed='true' name='Monthly Fraud Trend' w='52679' x='483' y='28200'>
+                  <layout-cache cell-count-w='12' minheight='176' type-h='scalable' type-w='cell' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='273' h='35707' id='16' is-fixed='true' name='Fraud by Supplier Country' w='46355' x='53162' y='28200'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='269' h='35153' id='18' is-fixed='true' name='Average Invoice Amount by Invoice Category' w='52679' x='483' y='63907'>
+                  <layout-cache minwidth='280' type-h='fixed' type-w='scalable' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='269' h='35153' id='19' is-fixed='true' name='Fraud by Blacklisted Supplier' w='46355' x='53162' y='63907'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <_.fcp.DashboardRoundedCorners.true...format attr='corner-radius' value='10' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+                <format attr='background-color' value='#f5f5f5' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{8D9A61B9-88C1-4B5C-842A-7604A7825457}' />
+    </dashboard>
+  </dashboards>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' name='Total Procurement Invoices'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{E4F3DA87-8251-4FB2-8CEC-DEA892F5D117}' />
+    </window>
+    <window class='worksheet' name='Fraudulent Invoices'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{EEE2BDDC-0B96-40C8-BF08-8E0CBE74D4C2}' />
+    </window>
+    <window class='worksheet' name='Fraud Rate'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{82834BB1-1138-483B-9FA2-962D2930C1FF}' />
+    </window>
+    <window class='worksheet' name='Blacklisted Suppliers'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{63C736D9-3B61-42CD-999F-76CFBECBB4DF}' />
+    </window>
+    <window class='worksheet' name='Average Supplier Risk Score'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{0A120E51-C6F3-4D19-A10E-E02BB09FA301}' />
+    </window>
+    <window class='worksheet' name='Monthly Fraud Trend'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:invoice_month:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{9B97800E-999F-4B8A-979D-0F4B9CFA5796}' />
+    </window>
+    <window class='worksheet' name='Fraud by Supplier Country'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:supplier_country:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{293E77BC-6E91-4730-83B4-DFDA22954475}' />
+    </window>
+    <window class='worksheet' name='Average Invoice Amount by Invoice Category'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{D5EE2582-8191-4126-87A4-38E6A1057218}' />
+    </window>
+    <window class='worksheet' name='Fraud by Blacklisted Supplier'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:blacklisted_flag:ok]</field>
+            <field>[federated.1q1txzt0lri11915ldsyq00jffgo].[none:is_fraud:ok]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{6979E9FE-D94A-4CBC-B497-5DC06EBAEA8E}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='Average Invoice Amount by Invoice Category'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Average Supplier Risk Score'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Blacklisted Suppliers'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fraud Rate'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fraud by Blacklisted Supplier'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fraud by Supplier Country'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Fraudulent Invoices'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Monthly Fraud Trend'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Total Procurement Invoices'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{955FE98D-F27D-49DE-A459-97D1BF17BF7C}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Average Invoice Amount by Invoice Category' width='192'>
+      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
+      aQpATPsPtTg8E2c/uDgAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Average Supplier Risk Score' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAD6klEQVR4nO3YP2hdZRzG8d/JzR9TsTS2GFCQuqhYFUFBiNJJUEQEXVw6uBQEQdG5tugm
+      tHRUJyvFRQKdimhUClUqKERxiEN0aNS0MY1KmjS5Se5xcLyOQvA+n8/8DO9wvvCet2nbti0I
+      NbTbB4DdJACiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJ
+      gGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCi
+      CYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYA
+      ogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgm
+      AKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCINrwbh8A/ms7Ozv10+Ur
+      tbp2ow7ecVvtn9j7r7terycABsva+ka9+uZ79dlX31XbtrVv78116tjReuKxh/q2Lx9/xxWI
+      wfL+9EzNfDlbzz81VaffOFrrNzbr+Kmztdnd6tuuXl8XAIOj1+vV+S++qU5nqF558dl67smp
+      evDeu+q3pZWam1/o2585+boAGBw3Nrq1uLRS42OjNXlgopqmqdsn91fbtvXr1Wt9++HhjgAY
+      HDs7vdre3qlmqKnOUFNVVZ3OP59422v79r1eKwAGx9jYSO0ZH6tud7uur29UVdXKn6vVVNXk
+      gX19+7PnPhcAg2N0ZLgeuOdgbXa36tOLs/XLleX6fu7nunXiljp09521sPh7nZmeqavLf9TS
+      tb/q7XenPYMyOJqmqZeOPF2XZn+sYyc/qNGRkdroduut147UnvGb6sTpD+uj8xdrYXG5Hn/k
+      UK2tb1TTtm3/5Qj+p9q2rbn5hfr4wre12d2qw4/eX1MP31dDTVNz85fr3CeX6oVnDtfwcKcu
+      fP2DAMjmH4BoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgC
+      IJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBo
+      AiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmA
+      aAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJ
+      gGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKL9Db8BqOdkg/TjAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Blacklisted Suppliers' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAEYElEQVR4nO3ZT2jXZQDH8c9vv01xus0/qw1ta1sxQydICyqkMrYwokBqRaIlQZQQyLos
+      8dLQQ0QdworyEIVEIXWIUDp0iPBQIHoQI8PoDzSGaX/c3Izt99uvQzQZGx26jO39fh2f5/k+
+      fC9v+D7fp1CpVCqRoKrm+wWk+WQAQjMAoRmA0AxAaAYgNAMQmgEIzQCEZgBCMwChGYDQDEBo
+      BiA0AxCaAQjNAIRmAEIzAKEZgNAMQGgGIDQDEJoBCM0AhGYAQjMAoRmA0AxAaAYgNAMQmgEI
+      zQCEZgBCMwChGYDQDEBoBiA0AxCaAQjNAIRmAEIzAKEZgNAMQGgGIDQDEJoBCM0AhGYAQjMA
+      oRmA0AxAaAYgNAMQmgEIzQCEZgBCMwChGYDQDEBoBiA0AxCaAQjNAIRmAEIzAKEZgNAMQGgG
+      IDQDEJoBCM0AhGYAQjMAoRmA0AxAaAYgNAMQmgEIzQCEZgBCMwChGYDQDEBoBiA0AxCaAQjN
+      AIRmAEIzAKEZgNCq5/sFpP9rYrKUr05/m9a116W9pTlJUiqVM3Tht1Qqlel19Stqs3pl3azn
+      r/41YQBaeCYmJnPi5Dd588ixnDr7fQb29OW5Jx5Mkvw89Gt6d+3P1NS1AJ569L4M9u+ctU//
+      gcMGoIXnsy9PZe/g2ykUCrPmRq6MZ2qqkod6bs/GztYkyaZb2ubcZ8ttGwxAC8+N667Pged3
+      ZfjiH3nr/eMz5kaujCdJtm+7M71bNv/nPk8+3OMhWAvP5g0d2d3Xm9plS2fNXR4dS5IcPPRh
+      tj9zMK8c/jijY1fn3OeX4UsGoMWlo6U5g/07s/uRnhSLVXnjyLEMvPTOjEPxvyZLJT+BtLh0
+      rW9L1/q2JMn993Tn3h378vXpcymXp1JdXZyxtr2l2QC0uJz/cSiNqxvSULc8J8+cz8RkKZ3t
+      N6RYrMrl0bFcuPRnmhpXpqpQyHc/DBmAFpejx0/kg0++yJIlNRkZHU/tsqUZ2NOXQqGQdz/6
+      PIfe+zRHX9+XtU1rsmPvywaghWvrHZvSULc8t3bdND322AN3ZVX9igxf/D3rmtZk293d6Wj9
+      55LszLmf0riqPhs7W1NTU51X9z+dQmWu04G0yJTLU9n6+Avp7ro5r7347PS4AQihUqmkVC6n
+      qlCVYvHaz08DEJr3AEIzAKEZgNAMQGgGIDQDEJoBCM0AhGYAQjMAoRmA0AxAaAYgNAMQmgEI
+      zQCEZgBCMwChGYDQDEBoBiA0AxCaAQjNAIRmAEIzAKEZgNAMQGgGIDQDEJoBCM0AhGYAQjMA
+      oRmA0AxAaAYgNAMQmgEIzQCEZgBCMwChGYDQDEBoBiA0AxCaAQjNAIRmAEIzAKEZgNAMQGgG
+      IDQDEJoBCM0AhGYAQjMAoRmA0AxAaAYgNAMQmgEIzQCEZgBCMwChGYDQDEBoBiA0AxCaAQjN
+      AIRmAEIzAKEZgNAMQGgGIDQDEJoBCM0AhGYAQjMAoRmA0AxAaAYgNAMQ2t/4O6zIWPAXqwAA
+      AABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='192' name='Dashboard 1' width='192'>
+      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
+      A7OEqrke2+NAAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Fraud Rate' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAE40lEQVR4nO3ZX2iVdRzH8c9zzpnW1pi2RkotEIRcEkkuw4kay8LIDP+kENOMQMFkUbjC
+      uogksFxNrCQovcgQExsWRamFpq6rlCE0V21NtjY357bTmdt0O2fn6UYGh1Hh1Th83q/L5wdf
+      ngPPm9/vxwnCMAwFmIpM9AsAE4kAYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYC020S8A3Ix4YkBtl7oVhtKM4jtVkJ83tjY4dF2tHd0a
+      uj6se6YXqaiwQEEQ/OuskWSKAJA9ar//WW/tPqDE1SFJUtHtBdr95iYtKL1P5xtbtHHbh+q6
+      Epck5d46Wa9vXqOKFeXjIhhJplT3S4P27P+WIxCyR3tXj9YuW6xP36nU+lWP6kpfQtWf1Cqd
+      DnXpcp/K5pbo47df1Btb1mp4JKn39x5R/8DQuDnHTp3T81W7dO7XZgVhGIYT8FuAm5ZMjSoW
+      jSgIAnV09WrhM1W6e/odOnFwhxRK0RtryVRKi9a8pp6+hM4crta0oqkZc843XlR9w5+63PM3
+      OwCyR04sqiAIlE6ndeDrkxpNpzX/wVmKRiKK3VgLw1DHT9ers7tPs2YWq3BK/rg5D5TM0IbV
+      S5SXO5k7ALLL7y3tqtl7RD/U1Wvl0jJVbVw1dsbvjferZt9X+vK7M3p4zr3a/kqFcnL++xMn
+      AGSN5tZOPVu5U9eGR1S97QWtXFo29vEPDF7Tupff028t7dq87klVPrdckybl/O9MjkDIGjv2
+      HFJPvF9b1j+lkpnFamz+S00XOxSGofYdOq6GpjY9/dh8PfFIqZpbO3WhqU3JZEqJq4P6rPZH
+      /dHSMW4ml2BkhVRqVKXLX1I8MZDx/K5phTr1xbvasLVGdWcvZKzFolGdPrxTR386q+0fHNTC
+      h2br811bx3aNj/Z/wxEI2SEIAr26abWSqdGM57fl3qJINKKKFeV6fNHcjLVIJNCU/DwtK5+n
+      7t6EliyYk/GfwOJ597MDwBt3AFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgj
+      AFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgj
+      AFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgj
+      AFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgj
+      AFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgjAFgj
+      AFgjAFgjAFgjAFj7B1SQ953Xr+vFAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Fraud by Blacklisted Supplier' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAHdElEQVR4nO3d23OUdx3H8c/uJuXYZJMQkpCGACLhEBikYIlaLaO2BREdp+oM/gve2dHx
+      in/By17YmXIhDpaDU9ImnMRQMBAmEEgagZwI5Ehi2ARyzu7jhbRUqXQNLGvm835dPbv7ZPb7
+      m+x7nmeem18oCIJAgKlwugcA0okAYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0A
+      YI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYI0AYC3lAcR6O/Th2QbNTIzq
+      0tXrjz4IAvX2D6T664Enykj1F4wO3dWpk7VaURTVzfY7mhnuU1vPPZVvWKP9B/6sX//mVyqK
+      zk/1GMAXei63QN/f+bpqTpzSdDyh+hu3tfu1TWpq+YfKy9fy40dapTyABVk5WlaQrx98d5vy
+      8gtVvqJQVWcbtX37RkVfkPqHJ1I9AvBfhYIgCNI9BJAuPAWCtaQDqK05rff+cEStPfd09IOq
+      xz6fGupS5blGSdLRY9Vq+aRJAw8mJUnxqQn1DcYe+5uPqk9qbCo+29mBp5b0U6CO9nYtXVqi
+      5o4+9fbf1Y3GBtVeu6Xdb35T1cfPqmxFvu50j+mD6mH19A9oRW5Uo0GLTjR3aHn+Qp2o79Jb
+      39ukT27e1isV23Th41o1tt3Rq6/tSOX6gCdK/hYoFNLCaLb6Om9LCnS7Z0Cj/W06cbpWK7d8
+      S+VfWaaLNTUqWLlaIUn93T0am45rZOS+CouLtXHTOtWc/ZsKl2Sp/uO/Krp6s1aXLEnZwoBk
+      JB1AcXGxbt3q1daXN2j1qhWanJhQTmGxtr6yVR0NtbrRc197f/FT3b3VolWrSlVYUqwXIhHl
+      57yozEXZmowNavu2r2l4PKGvv/ptDbZcVZCxSBmRUCrXBzwRT4FgjadAsEYAsEYAsEYAsEYA
+      sEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYA
+      sEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYAsEYA
+      sJbx6cHMzEzahgiFQopEImn7/qcRBIFGRkaUnZ2d7lEwC58FMD09rSAI0jJEJBKZswEkEgn1
+      9fURwBzFLRCsEQCsEQCsEQCsEQCsEQCsEQCsEQCsEQCsEQCsZXz5KfgysXffVd/4eLrHmJXM
+      0lLlvf12usdIGwJ4BiYaGjTa2ZnuMWZl3saN6R4hrbgFgjUCgDUCgDUCgDUCgDUCgDUCgDUC
+      gDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUCgDUC
+      gDUCgDUCgDUCgDUCgDUCgDUCgLWkA2i48BcdfP+IBobHVF394WOfT8W6dOrCNUlS9fEqtV67
+      rIH7k5KkRHxGo2OP76By+vQJjU/FZzs7nqGhoSG1tbUpFoupsrJSnQ83/Ghvb9fJkyfV3d2t
+      yspK1dfXa2ZmRrW1tWme+NlIeoeY8zXVWr1ui/5YVavYzfNaviRbF6/36uc/eVOVRw6pqCCq
+      Sx2TCh4M6ULdRRV8Z4fid2+p8k/nVJy/UO+fvq7f/vJnqjl/Rbt/9EOd+eioqs7X6+WKHVqc
+      yhUiKZcvX1ZXV5dKS0sVi8WUlZWlIAh07NgxlZSUaHBwUHl5eWpubtbw8LCOHz+uioqKdI/9
+      1JK+AsSnJtTY1qsFiTFJ0sC9mNovVenAgQOav+ob2lK2XKcO71coWqyQpNYrV9Tc1KSuexNa
+      u3aNtm3frvd+/44WhB5o/zu/02TOeq0syknVuvA/qqioUDgcVnl5uYqKinT48GFJUmZmpgoK
+      ChQEgZqamrRnzx6dOXNGsVhMg4ODaZ766SUdQFY0V/HpaUVzcpWbm6PLl+o1f/EifXXDZl2t
+      OaarbX3a9eO31Fh3XtHcXC2ORrUoZ6myZobUN56h7ra/a936DZoIv6g3du3SjbpTGhiZUiQc
+      SuX6kIQgCFRXV6exsTF1dnaqu7tbmzdv1sGDB7V+/Xq1tLRozZo1KisrU1ZWlvbt26e9e/cq
+      Ly8v3aM/tVAQBIEkjY+P6+FhUoJEQgqFFAqFlEgkFHp4/G/nBIGCIFA4HP7snM+/Dof/1V8k
+      EtG8efOe4bKen3g8rnM7d+qlObxJ3kuHDj32/vT0tBKJxJz9vyRr1rtEhsKPLh7h8BdfSD4f
+      xafn/Odr/H/KzMxM9wjPBb9CWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMA
+      WCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMAWCMA
+      WJv1/gB4JGPpUmWG5uZONxnLlqV7hLSa9Q4xz9Jc3yGmtbVVZWVl6R4Fs8AtEKwRAKwRAKwR
+      AKwRAKwRAKwRAKwRAKwRAKwRAKz9E2AJC75aPKv7AAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Fraud by Supplier Country' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Fraudulent Invoices' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAFBUlEQVR4nO3YXWiVdQDH8d9z3NZenWHZxBeylmhkkqtwWCRJ0hv2IlrUIF2FLXoxiTn0
+      YlBU9gLJ7CaS8iJMKQqLKKkLoTIinEHzlbk53Whvbp4djzvnbDv/7hbSvOlmHX7fz+XzwI//
+      zRee5x+FEIIAU7HJPgAwmQgA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
+      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
+      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
+      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
+      1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA1ggA
+      1ggA1ggA1ggA1ggA1ggA1ggA1vIm+wDAfxVPJHX6bI+yIWjenGs0bWrp+LvhVFptZ7o1nMpo
+      9syrVHH1lRNuEAByTghBX+0/qNd37NHA+YQkqa7mfjXUrVUIQYdaWvXqGzvVfrZHkrSs6kbt
+      bqqfcIsAkHOaW1pV/9bHmjtrhrZtXqfy0hIFBUlS30BcdVs/UDozqncaalV57Uz1DQxddosA
+      kFNCCPros+81OpZVU+NzWlg5R7FYpCiKJEmff/uzes/F9XbDeq154A5JkWKx6LJ7/AQjp6TS
+      GR0+2qZpZSXauXe/ljz4olY8uUUHDx1TCEG/Nh9TLBbpj6NtunXVRlU/ukm79x1QCOFfWx1d
+      vQSA3JJKj+hCcliDQxc0q2K6Xl7/kPoG4tr42odKDqfUPzikbDYonRnRpqcfVmlxoRrf/1TH
+      T3VestN2plvPNjQRAHJLQX6eCgsLNLW0WC+tW6X1a+7Rgutmq6f/vPrODWlqWbFiUaQNT9yn
+      mkfu1l1LFykzMqqT7V2X7HzyxQ860dZJAMgtxUVX6OYF85RIDqu5pVU9/YPq6OpVeVmJZkwv
+      V/UtC5QNQT/9fkQXh9P68/hpxWKRrp9boXgiqZPtXYonkrp98Xw9tXqFojDRxxHwP3b4yCnV
+      vPKeMiMjyp+Sp1Q6o60vPKbatSvVey6uNc+/qc7ufpUUFSqRvKjV9y7Tu1ueUdOufWra9bX2
+      7mjQbYvnSxIBIPeEENTa8Ze++fE3pdIZLV+6SNVLFo7fBPUNxPXld7+ou39QVYtu0Mo7l6gg
+      P0+19dvVcuK0DuzZpuKiQkkEABNjY1ktf3yzqm6q1PbGDePPCQAWQggaHRtTLIppypR/fn0J
+      ANa4BYI1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
+      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
+      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
+      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1
+      AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoA1AoC1vwF2yCUHYRgv
+      GQAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='192' name='Monthly Fraud Trend' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Total Procurement Invoices' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAFr0lEQVR4nO3afWhVdRzH8c+5u21uTsec0+EqJTENXTmflpElWpjiKgNJApNIs2wRYk8Q
+      FWVZUNgDQkhhUCY9UFIuTUQSQTGTEDWTWW7zaXO657vdbded0x/ZYFgh/ZGTz/v15/l9OZwL
+      983v/g43iKIoEmAqdrkfALicCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADW
+      CADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADW
+      CADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADW
+      CADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADW
+      CADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADWCADW
+      CADWCADWCADWCADWCADWCADWCADW4pf7AYB/k2hLqvpUnZIdXSosyFNBfq6CIPjb2TAMVXWy
+      Tg1Nrbp2WL7y83J6ZqMoUk1dg06fadDgQQM1vHCIgiBQEEVR9H9+IOBShWGoe5as1IEjlZKk
+      jPSrtGzhXD350N0XRZBKndfTr6/Tt9v2qDsMlZWZodeeWqR5s6ZKkt5f/53eWfeNOrtSisfT
+      tGTBLD2zdD4/gdC3zZ05RV+seU5vv/CIoijS2g2bVVffdNHcV9/v0satuzXjlpu0dtUTkqSV
+      721QY3NChyqq9dYHX2t44RB9vHqFri7I09pPt+jAkUoCQN8Vi8W09IHZKikeo9I7pig3J1ux
+      IFAs1vtrG0WRyrfvlSQ9/uBczbptgqZNHqeG5oT2Hz6mzT/8pO7uUAvnzdDtJUWaP2eawijS
+      jj0HOAOgb/ulolqfle/U4YrjamvvUNmiUg3OHdhrprs7VNWpOqWnxzVs6CAFQaDCgjxJ0sma
+      czp2vFaSNOKaoZLUa40dAH1aR2eXztY3q7MrpfT0uM6ca1Kyo6vXTBRFSqXO99od0mJ/nhHC
+      KFRnV0qSFE/7ay12YS1iB0DfNrFolCYWjVIYhnr42Xf10ZfbVDJ+tGZPn9QzE4vFlDMgS3X1
+      zUq0JTU4d6AamhKSpIL8QcrNyZaknmsNTa0X1nLZAdB31Z5t1KGKanV3h2pJtKu+sUWSFI+n
+      SZIqT9Sq8kStYrFAxWNHKgxDbdmxT40tCe3++VdlZ/VT8diRmlg0SpK0Zcc+tSc7tW3XfknS
+      tMljeQ2KvmvfwaNaUPaGsvtnqit1Xm3tHbq5eIw+enO5oihSyb3LNX7sSH2yeoWOVp3W/GWr
+      1NqWVGa/DLW1d2jF4nkqW1Sq1rak7nv0Vf1WdVoD+mepJdGuOdMnac0rjxEA+q72ZKc2bf9R
+      FcdOKQgCFY0ZoTtvLVZWZoYOHqlS6eKX9XzZ/Vqy4C5J0u/Ha1S+fa9aEu2aOuEGzZh6Y8+Z
+      oL6xRRu37taJmnMaN3qESmdOUb+MdALAlenz8p16cfV6bfrwJV1/XeF/vg8B4IrUHYYKw1Dx
+      tLR//GvEpSAAWOMtEKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
+      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
+      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
+      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwR
+      AKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKwRAKz9
+      AdVgYvxGi0C7AAAAAElFTkSuQmCC
+    </thumbnail>
+  </thumbnails>
+</workbook>
