@@ -12,18 +12,20 @@ def get_supplier_features(supplier_id):
 
     query = """
         SELECT
-            supplier_invoice_count_30d,
-            supplier_avg_amount_90d,
-            supplier_country,
-            supplier_age_days,
-            supplier_risk_score,
-            blacklisted_flag,
-            avg_invoice_amount,
-            region,
-            annual_budget
-        FROM training_invoices
-        WHERE supplier_id = %s
-        LIMIT 1;
+    COUNT(*) AS supplier_frequency,
+
+    MAX(supplier_invoice_count_30d),
+    MAX(supplier_avg_amount_90d),
+    MAX(supplier_country),
+    MAX(supplier_age_days),
+    MAX(supplier_risk_score),
+    BOOL_OR(blacklisted_flag),
+    MAX(avg_invoice_amount),
+    MAX(region),
+    MAX(annual_budget)
+
+    FROM training_invoices
+    WHERE supplier_id = %s;
     """
 
     cur.execute(query, (supplier_id,))
@@ -36,6 +38,7 @@ def get_supplier_features(supplier_id):
         print(f"Supplier '{supplier_id}' not found.")
 
         return {
+            "supplier_frequency": 0,
             "supplier_invoice_count_30d": 0,
             "supplier_avg_amount_90d": 0.0,
             "supplier_country": "UNKNOWN",
@@ -49,17 +52,27 @@ def get_supplier_features(supplier_id):
 
     return {
 
-        "supplier_invoice_count_30d": row[0],
-        "supplier_avg_amount_90d": row[1],
-        "supplier_country": row[2],
-        "supplier_age_days": row[3],
-        "supplier_risk_score": row[4],
-        "blacklisted_flag": row[5],
-        "avg_invoice_amount": row[6],
-        "region": row[7],
-        "annual_budget": row[8]
+    "supplier_frequency": row[0],
 
-    }
+    "supplier_invoice_count_30d": row[1],
+
+    "supplier_avg_amount_90d": row[2],
+
+    "supplier_country": row[3],
+
+    "supplier_age_days": row[4],
+
+    "supplier_risk_score": row[5],
+
+    "blacklisted_flag": row[6],
+
+    "avg_invoice_amount": row[7],
+
+    "region": row[8],
+
+    "annual_budget": row[9]
+
+}
 
 '''
 #testing purpose

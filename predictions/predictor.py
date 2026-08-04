@@ -24,6 +24,12 @@ def predict_invoice(document_id):
     # Generate engineered features
     feature_df = prepare_features(document_id)
 
+    print("\nGenerated Columns:")
+    print(feature_df.columns.tolist())
+
+    print("\nExpected Columns:")
+    print(preprocessor.feature_names_in_)
+    
     # Preprocess features
     transformed_features = preprocessor.transform(feature_df)
 

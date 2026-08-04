@@ -56,7 +56,7 @@ def save_prediction(cur, document_id):
 
             probability,
 
-            "XGBoost",
+            "LightGBM",
 
             datetime.now()
 

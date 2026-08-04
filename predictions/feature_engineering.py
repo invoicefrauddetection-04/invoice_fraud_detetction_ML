@@ -184,11 +184,16 @@ def generate_features(document_id):
 
         "submission_hour": submission_hour,
 
+        # Feature expected by trained model
+        "supplier_frequency":
+                        supplier_features["supplier_frequency"],
+
+        # Behavioural features
         "supplier_invoice_count_30d":
-            supplier_features["supplier_invoice_count_30d"],
+                        supplier_features["supplier_invoice_count_30d"],
 
         "supplier_avg_amount_90d":
-            supplier_features["supplier_avg_amount_90d"],
+                        supplier_features["supplier_avg_amount_90d"],
 
         "invoice_amount_zscore":
             invoice_amount_zscore,
@@ -255,47 +260,52 @@ def prepare_features(document_id):
 
     column_order = [
 
-        "invoice_amount",
+    "invoice_amount",
 
-        "payment_terms",
+    "payment_terms",
 
-        "invoice_type",
+    "invoice_type",
 
-        "submission_hour",
+    "submission_hour",
 
-        "supplier_invoice_count_30d",
+    "supplier_invoice_count_30d",
 
-        "supplier_avg_amount_90d",
+    "supplier_avg_amount_90d",
 
-        "invoice_amount_zscore",
+    "invoice_amount_zscore",
 
-        "late_night_submission_flag",
+    "late_night_submission_flag",
 
-        "supplier_country",
+    "supplier_country",
 
-        "supplier_age_days",
+    "supplier_age_days",
 
-        "supplier_risk_score",
+    "supplier_risk_score",
 
-        "blacklisted_flag",
+    "blacklisted_flag",
 
-        "avg_invoice_amount",
+    "avg_invoice_amount",
 
-        "region",
+    "region",
 
-        "annual_budget",
+    "annual_budget",
 
-        "invoice_month",
+    "invoice_month",
 
-        "invoice_weekday",
+    "invoice_weekday",
 
-        "invoice_quarter",
+    "invoice_quarter",
 
-        "is_weekend"
+    "is_weekend",
+    
+    "supplier_frequency"
 
-    ]
+]
 
     df = df[column_order]
+
+    print("\nFinal Model Columns:")
+    print(df.columns.tolist())
 
     return df
 
