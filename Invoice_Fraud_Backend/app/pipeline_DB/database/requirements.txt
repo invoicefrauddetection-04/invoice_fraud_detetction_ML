@@ -7,3 +7,5 @@ seaborn==0.13.2
 joblib==1.5.3
 boto3==1.43.56
 psycopg2-binary==2.9.12
+lightgbm==4.6.0
+shap==0.52.0
