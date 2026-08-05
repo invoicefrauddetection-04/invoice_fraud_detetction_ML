@@ -88,15 +88,6 @@
 
             </a>
 
-            <a href="{{ url_for('reports') }}"
-                class="{% if request.endpoint=='reports' %}active{% endif %}">
-
-                <i class="fa-solid fa-file-lines"></i>
-
-                <span>Reports</span>
-
-            </a>
-
         </nav>
 
         <!-- Bottom Section -->
@@ -142,8 +133,6 @@
         Business Analytics
         {% elif request.endpoint=="ai" %}
         AI Investigator
-        {% elif request.endpoint=="reports" %}
-        Reports
         {% elif request.endpoint=="about" %}
         About
         {% endif %}
@@ -152,18 +141,6 @@
 
     <div class="navbar-right">
 
-        <div class="search-box">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input type="text"
-                placeholder="Search Invoice, Supplier or PO Number...">
-
-        </div>
-
-<div class="theme-toggle" id="themeToggle">
-    <i class="fa-solid fa-moon"></i>
-</div>
 
         <div class="profile">
 
@@ -194,8 +171,6 @@
         </main>
 
     </div>
-
-<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 
 {% block scripts %}{% endblock %}
 
