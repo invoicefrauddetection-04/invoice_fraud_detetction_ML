@@ -2,9 +2,9 @@ import pandas as pd
 
 from datetime import datetime
 
-from database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.db_connection import get_connection
 
-from predictions.supplier_lookup import get_supplier_features
+from app.pipeline_DB.predictions.supplier_lookup import get_supplier_features
 
 #-----------------------------------
 # Fetch OCR Data

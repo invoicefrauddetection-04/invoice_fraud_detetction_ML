@@ -257,7 +257,7 @@ def list_invoices():
 
     response = s3.list_objects_v2(
         Bucket=bucket,
-        Prefix="invoices/"
+        Prefix="converted_images/"
     )
 
     invoices = []

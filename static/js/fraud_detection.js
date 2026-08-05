@@ -151,7 +151,7 @@ const progressFill = document.getElementById("progressFill");
 
 // Backend URL
 // change the IP here to your backend server's IP address
-const API_BASE_URL = "http://192.168.2.31:8000";
+const API_BASE_URL = "http://192.168.1.184:8000";
 
 const processingMessages = [
 

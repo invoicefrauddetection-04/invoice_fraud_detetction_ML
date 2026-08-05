@@ -2,10 +2,10 @@ import json
 import shap
 import pandas as pd
 
-from database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.db_connection import get_connection
 
-from predictions.predictor import predict_invoice
-from predictions.load_model import model, preprocessor
+from app.pipeline_DB.predictions.predictor import predict_invoice
+from app.pipeline_DB.predictions.load_model import model, preprocessor
 
 # ----------------------------------------------------
 # Initialize SHAP Explainer

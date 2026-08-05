@@ -1,11 +1,11 @@
 import json
 
-from database.scripts.db_connection import get_connection
-from database.scripts.s3_connection import get_s3_client
-from database.scripts.aws_config import *
+from app.pipeline_DB.database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.s3_connection import get_s3_client
+from app.pipeline_DB.database.scripts.aws_config import *
 
-from predictions.parse_ocr_json import parse_ocr_json
-from predictions.file_utils import get_json_object_key
+from app.pipeline_DB.predictions.parse_ocr_json import parse_ocr_json
+from app.pipeline_DB.predictions.file_utils import get_json_object_key
 
 
 # ----------------------------------------------------

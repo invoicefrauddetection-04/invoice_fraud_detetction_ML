@@ -1,8 +1,8 @@
-from database.scripts.insert_uploaded_document import process_uploaded_documents
-from database.scripts.insert_ocr_result import process_ocr
-from predictions.feature_engineering import process_features
-from predictions.prediction_service import process_predictions
-from predictions.shap_service import process_shap
+from app.pipeline_DB.database.scripts.insert_uploaded_document import process_uploaded_documents
+from app.pipeline_DB.database.scripts.insert_ocr_result import process_ocr
+from app.pipeline_DB.predictions.feature_engineering import process_features
+from app.pipeline_DB.predictions.prediction_service import process_predictions
+from app.pipeline_DB.predictions.shap_service import process_shap
 
 
 # ----------------------------------------------------

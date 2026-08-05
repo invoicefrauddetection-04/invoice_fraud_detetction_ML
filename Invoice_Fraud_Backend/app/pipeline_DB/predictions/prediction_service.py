@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.db_connection import get_connection
 
-from predictions.predictor import predict_invoice
+from app.pipeline_DB.predictions.predictor import predict_invoice
 
 
 # ----------------------------------------------------------

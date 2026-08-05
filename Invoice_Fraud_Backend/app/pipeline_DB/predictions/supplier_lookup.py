@@ -1,4 +1,4 @@
-from database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.db_connection import get_connection
 
 
 def get_supplier_features(supplier_id):

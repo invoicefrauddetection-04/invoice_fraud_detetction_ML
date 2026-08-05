@@ -1,6 +1,6 @@
-from predictions.feature_engineering import prepare_features
-from predictions.load_model import model, preprocessor
-from database.scripts.db_connection import get_connection
+from app.pipeline_DB.predictions.feature_engineering import prepare_features
+from app.pipeline_DB.predictions.load_model import model, preprocessor
+from app.pipeline_DB.database.scripts.db_connection import get_connection
 
 
 # ----------------------------------------------------

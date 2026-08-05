@@ -1,6 +1,6 @@
-from database.scripts.db_connection import get_connection
-from database.scripts.s3_connection import list_all_images
-from database.scripts.aws_config import *
+from app.pipeline_DB.database.scripts.db_connection import get_connection
+from app.pipeline_DB.database.scripts.s3_connection import list_all_images
+from app.pipeline_DB.database.scripts.aws_config import *
 
 
 def insert_uploaded_documents():

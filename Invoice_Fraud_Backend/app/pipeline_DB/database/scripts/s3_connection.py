@@ -1,6 +1,6 @@
 import boto3
 
-from database.scripts.aws_config import (
+from app.pipeline_DB.database.scripts.aws_config import (
     AWS_ACCESS_KEY,
     AWS_SECRET_KEY,
     AWS_REGION,

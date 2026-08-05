@@ -6,7 +6,7 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 if CURRENT_DIR not in sys.path:
     sys.path.append(CURRENT_DIR)
-from database.scripts.db_config import DB_CONFIG
+from app.pipeline_DB.database.scripts.db_config import DB_CONFIG
 
 
 def get_connection():
