@@ -1,4 +1,4 @@
-from database.pipeline_runner import run_pipeline
+from pipeline_runner import run_pipeline
 
 def execute_pipeline(document_id: int):
 
