@@ -27,42 +27,44 @@ def read_json_from_s3(bucket_name, object_key):
 
 
 # ----------------------------------------------------
-# Get All Uploaded Documents
+# Get Uploaded Document
 # ----------------------------------------------------
 
-def get_uploaded_documents(cur):
+def get_uploaded_document(cur, document_id):
 
-    cur.execute(
-        """
+    query = """
         SELECT document_id, image_name
         FROM uploaded_documents
-        WHERE processing_status = 'UPLOADED'
-        ORDER BY document_id;
-        """
-    )
+        WHERE document_id = %s
+        AND processing_status = 'UPLOADED';
+    """
 
-    return cur.fetchall()
+    cur.execute(query, (document_id,))
+
+    return cur.fetchone()
+
 
 # ----------------------------------------------------
 # Insert OCR Result
 # ----------------------------------------------------
 
-def insert_ocr_result(bucket_name):
+def insert_ocr_result(bucket_name, document_id):
 
     conn = get_connection()
     cur = conn.cursor()
 
-    # Get all uploaded documents
-    rows = get_uploaded_documents(cur)
+    row = get_uploaded_document(cur, document_id)
 
-    if not rows:
+    if row is None:
 
-        print("No new uploaded documents found.")
+        print(f"Document {document_id} not found or already processed.")
 
         cur.close()
         conn.close()
 
         return
+
+    document_id, image_name = row
 
     query = """
     INSERT INTO ocr_results
@@ -100,90 +102,88 @@ def insert_ocr_result(bucket_name):
         supplier_country = EXCLUDED.supplier_country,
         total_amount = EXCLUDED.total_amount;
     """
-    # Process every uploaded document
-    for document_id, image_name in rows:
 
-        try:
+    try:
 
-            print("\n======================================")
-            print(f"Processing Document ID : {document_id}")
-            print("======================================")
+        print("\n======================================")
+        print(f"Processing Document ID : {document_id}")
+        print("======================================")
 
-            # Generate OCR JSON path
-            object_key = get_json_object_key(image_name)
+        object_key = get_json_object_key(image_name)
 
-            print(f"Image Name : {image_name}")
-            print(f"OCR JSON   : {object_key}")
+        print(f"Image Name : {image_name}")
+        print(f"OCR JSON   : {object_key}")
 
-            print("\nTrying to fetch S3 object:")
-            print(f"Bucket : {bucket_name}")
-            print(f"Key    : {object_key}")
-            
-            # Read OCR JSON from S3
-            ocr_json = read_json_from_s3(
-                bucket_name,
-                object_key
-            )
+        print("\nTrying to fetch S3 object:")
+        print(f"Bucket : {bucket_name}")
+        print(f"Key    : {object_key}")
 
-            # Parse OCR JSON
-            invoice = parse_ocr_json(ocr_json)
-            invoice["document_id"] = document_id
+        ocr_json = read_json_from_s3(
+            bucket_name,
+            object_key
+        )
 
-            print("\n========== Parsed Invoice ==========\n")
+        invoice = parse_ocr_json(ocr_json)
 
-            for key, value in invoice.items():
-                print(f"{key:20}: {value}")
+        invoice["document_id"] = document_id
 
-            # Insert / Update OCR Result
-            cur.execute(query, invoice)
+        print("\n========== Parsed Invoice ==========\n")
 
-            # Update processing status
-            cur.execute(
-                """
-                UPDATE uploaded_documents
-                SET processing_status = 'OCR_COMPLETED'
-                WHERE document_id = %s;
-                """,
-                (document_id,)
-            )
+        for key, value in invoice.items():
+            print(f"{key:20}: {value}")
 
-            # Commit current document
-            conn.commit()
+        cur.execute(query, invoice)
 
-            print(f"\n✓ OCR Result saved for Document {document_id}")
+        cur.execute(
+            """
+            UPDATE uploaded_documents
+            SET processing_status = 'OCR_COMPLETED'
+            WHERE document_id = %s;
+            """,
+            (document_id,)
+        )
 
-        except Exception as e:
+        conn.commit()
 
-            # Rollback only the failed transaction
-            conn.rollback()
+        print(f"\n✓ OCR Result saved for Document {document_id}")
 
-            print(f"\n✗ Failed to process Document {document_id}")
-            print(f"{type(e).__name__}: {e}")
+    except Exception as e:
 
-            continue
+        conn.rollback()
 
-    print("\n======================================")
-    print("All uploaded documents processed.")
-    print("======================================")
+        print(f"\n✗ Failed to process Document {document_id}")
+        print(f"{type(e).__name__}: {e}")
 
-    cur.close()
-    conn.close()
+    finally:
+
+        cur.close()
+        conn.close()
+
 
 # ----------------------------------------------------
 # Pipeline Function
 # ----------------------------------------------------
 
-def process_ocr():
+def process_ocr(document_id):
 
     insert_ocr_result(
-        bucket_name=BUCKET_NAME
+        BUCKET_NAME,
+        document_id
     )
 
-
+'''
 # ----------------------------------------------------
 # Testing Purpose Only
 # ----------------------------------------------------
 
 if __name__ == "__main__":
 
-    process_ocr()
+    try:
+
+        document_id = int(input("Enter Document ID: "))
+        process_ocr(document_id)
+
+    except ValueError:
+
+        print("Please enter a valid Document ID.")
+'''

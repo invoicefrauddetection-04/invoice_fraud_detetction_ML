@@ -39,15 +39,23 @@ def generate_shap(feature_df):
 
     shap_values = explainer.shap_values(processed_df)
 
-    # LightGBM returns list
+    # Compatible with LightGBM + SHAP
     if isinstance(shap_values, list):
         shap_values = shap_values[-1]
-        
+
+    base_value = explainer.expected_value
+
+    if isinstance(base_value, (list, tuple)):
+        base_value = base_value[-1]
+
+    if hasattr(base_value, "__len__") and not isinstance(base_value, str):
+        base_value = float(base_value[0])
+
     explanation = shap.Explanation(
 
         values=shap_values[0],
 
-        base_values=explainer.expected_value,
+        base_values=float(base_value),
 
         data=processed_df.iloc[0],
 
@@ -109,7 +117,10 @@ def save_shap(
 
 ):
 
-    # Replace NaN with None for JSONB compatibility
+    # Convert dataframe to object type first
+    top_features = top_features.astype(object)
+
+    # Replace NaN values with None
     top_features = top_features.where(
         pd.notnull(top_features),
         None
@@ -155,7 +166,7 @@ def save_shap(
 
             prediction,
 
-            round(fraud_probability, 5),
+            round(float(fraud_probability), 5),
 
             float(base_value),
 
@@ -175,7 +186,7 @@ def save_shap(
 
         "prediction": prediction,
 
-        "fraud_probability": round(fraud_probability, 5)
+        "fraud_probability": round(float(fraud_probability), 5)
 
     }
 
@@ -241,7 +252,7 @@ def process_shap(document_id):
 
             fraud_probability,
 
-            explanation.base_values,
+            float(explanation.base_values),
 
             top_features
 
