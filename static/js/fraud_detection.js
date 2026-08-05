@@ -14,12 +14,6 @@ const stepProcessing = document.getElementById("step-processing");
 const stepResult = document.getElementById("step-result");
 const analyzeBtn = document.getElementById("analyzeBtn");
 
-const aiExplanationAction =
-    document.getElementById("aiExplanationAction");
-
-const explainAiBtn =
-    document.getElementById("explainAiBtn");
-
 // const API_URL = "http://192.168.2.214:8000/upload";
 
 async function waitForPrediction(imageName) {
@@ -179,10 +173,6 @@ analyzeBtn.addEventListener("click", async () => {
 
     analyzeBtn.disabled = true;
 
-    // Hide previous AI explanation while new invoice is processing
-    if (aiExplanationAction) {
-    aiExplanationAction.style.display = "none";
-}
 
     const formData = new FormData();
     formData.append("file", file);
@@ -316,9 +306,6 @@ analyzeBtn.addEventListener("click", async () => {
 
         document.getElementById("invoiceId").textContent =
             data.filename;
-
-        // Show Explain with AI only after prediction is ready
-        aiExplanationAction.style.display = "flex";
 
         analyzeBtn.disabled = false;
 
