@@ -15,16 +15,28 @@ def run_pipeline():
     print("Pipeline Started")
     print("===================================\n")
 
-    # Register newly uploaded document
-    document_id = process_uploaded_documents()
+    # Register uploaded invoice
+    result = process_uploaded_documents()
 
-    if document_id is None:
+    if result is None:
 
-        print("No new documents found.")
+        print("No images found in S3.")
 
         return
 
+    document_id, already_exists = result
+
     print(f"Document ID : {document_id}")
+
+    # Skip duplicate invoices
+    if already_exists:
+
+        print("\n===================================")
+        print("Invoice already exists.")
+        print("Skipping pipeline execution.")
+        print("===================================")
+
+        return
 
     try:
 
@@ -48,7 +60,7 @@ def run_pipeline():
 
         print(e)
 
-'''
+
 # ----------------------------------------------------
 # Testing Block
 # ----------------------------------------------------
@@ -56,4 +68,3 @@ def run_pipeline():
 if __name__ == "__main__":
 
     run_pipeline()
-'''
