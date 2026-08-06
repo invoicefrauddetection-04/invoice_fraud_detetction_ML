@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from botocore.exceptions import ClientError
 
 from app.services.pdf_service import convert_pdf_to_images
+from app.pipeline_DB.database.scripts.insert_uploaded_document import process_uploaded_documents
 
 from app.services.json_service import (
     process_invoice_to_json
@@ -130,6 +131,26 @@ def upload_to_s3(file):
 
         # }
 
+        image_name = os.path.basename(s3_key)
+        object_key = s3_key
+
+        result = process_uploaded_documents(
+            image_name=image_name,
+            object_key=object_key
+        )
+
+        if result is None:
+            return {
+                "status": "failed",
+                "message": "Failed to insert uploaded document."
+            }
+
+        document_id, already_exists = result 
+
+        print("\n========== upload_to_s3 ==========")
+        print(result)
+        print("==================================")
+        
         return {
 
             "status": "success",
@@ -138,7 +159,13 @@ def upload_to_s3(file):
 
             "filename": filename,
 
-            "image_name": os.path.basename(s3_key),
+            "image_name": image_name,
+
+            "document_id": document_id,
+
+            "already_exists": already_exists,
+
+            "object_key": object_key,
 
             "file_type": file_type,
 
@@ -222,7 +249,29 @@ def upload_to_s3(file):
 
         #     "json_s3_key": json_response["json_s3_key"]
 
-        # }  
+        # } 
+
+        #result = process_uploaded_documents()
+
+        image_name = os.path.basename(uploaded_images[0])
+        object_key = uploaded_images[0]
+
+        result = process_uploaded_documents(
+            image_name=image_name,
+            object_key=object_key
+        )
+
+        if result is None:
+            return {
+                "status": "failed",
+                "message": "Failed to insert uploaded document."
+            }
+
+        document_id, already_exists = result 
+
+        print("\n========== upload_to_s3 ==========")
+        print(result)
+        print("==================================")
 
         return {
 
@@ -233,6 +282,12 @@ def upload_to_s3(file):
             "filename": filename,
 
             "image_name": image_name,
+
+            "document_id": document_id,
+
+            "already_exists": already_exists,
+
+            "object_key": object_key,
 
             "file_type": file_type,
 

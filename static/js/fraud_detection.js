@@ -16,9 +16,36 @@ const analyzeBtn = document.getElementById("analyzeBtn");
 
 // const API_URL = "http://192.168.2.214:8000/upload";
 
+// async function waitForPrediction(imageName) {
+
+//     while (true) {
+
+//         const response = await fetch(
+//             `${API_BASE_URL}/prediction/${imageName}`
+//         );
+
+//         const prediction = await response.json();
+
+//         console.log(prediction);
+
+//         if (prediction.status === "success") {
+
+//             return prediction;
+
+//         }
+
+//         await new Promise(resolve => setTimeout(resolve, 3000));
+
+//     }
+
+// } 
+
+
 async function waitForPrediction(imageName) {
 
     while (true) {
+
+        console.log("Polling for:", imageName);
 
         const response = await fetch(
             `${API_BASE_URL}/prediction/${imageName}`
@@ -26,18 +53,20 @@ async function waitForPrediction(imageName) {
 
         const prediction = await response.json();
 
-        console.log(prediction);
+        console.log("Prediction API:", prediction);
 
         if (prediction.status === "success") {
+
+            console.log("Prediction Ready");
 
             return prediction;
 
         }
 
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        console.log("Still processing...");
 
+        await new Promise(resolve => setTimeout(resolve,3000));
     }
-
 }
 
 
@@ -145,7 +174,7 @@ const progressFill = document.getElementById("progressFill");
 
 // Backend URL
 // change the IP here to your backend server's IP address
-const API_BASE_URL = "http://192.168.1.184:8000";
+const API_BASE_URL = "http://192.168.2.233:8000";
 
 const processingMessages = [
 
@@ -195,7 +224,8 @@ analyzeBtn.addEventListener("click", async () => {
 
         console.log("Backend Response:", data);
 
-        const imageName = data.image_name;
+        //const imageName = data.image_name;
+        const imageName = data.upload.image_name;
 
         // Start polling backend immediately (runs in parallel)
         const predictionPromise = waitForPrediction(imageName);
@@ -304,8 +334,11 @@ analyzeBtn.addEventListener("click", async () => {
         document.getElementById("riskLevel").textContent =
             risk;
 
+        // document.getElementById("invoiceId").textContent =
+        //      data.filename;
+        
         document.getElementById("invoiceId").textContent =
-            data.filename;
+            data.upload.image_name;
 
         analyzeBtn.disabled = false;
 

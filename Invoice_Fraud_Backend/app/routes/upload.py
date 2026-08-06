@@ -23,15 +23,20 @@ async def upload_invoice(file: UploadFile = File(...)):
 @router.post("/upload")
 async def upload_invoice(file: UploadFile = File(...)):
 
-    # Upload invoice
     upload_response = upload_to_s3(file)
+    print(upload_response)
 
-    # If upload failed, return immediately
     if upload_response.get("status") != "success":
         return upload_response
 
-    # Execute pipeline
-    pipeline_response = execute_pipeline()
+    document_id = upload_response["document_id"]
+
+    already_exists = upload_response["already_exists"]
+
+    pipeline_response = execute_pipeline(
+        document_id,
+        already_exists
+    )
 
     return {
         "upload": upload_response,

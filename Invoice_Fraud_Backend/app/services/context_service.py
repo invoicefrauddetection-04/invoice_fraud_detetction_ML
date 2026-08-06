@@ -170,7 +170,8 @@ def get_invoice_context(document_id: int):
 
             "document_id": document_id,
 
-            "prediction_ready": prediction_info is not None,
+            #"prediction_ready": prediction_info is not None,
+            "prediction_ready": len(prediction_info) > 0,
 
             "shap_ready": shap_ready,
 

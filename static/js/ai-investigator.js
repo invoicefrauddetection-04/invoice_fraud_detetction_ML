@@ -237,9 +237,9 @@ async function sendQuestion() {
     });
 
     try {
-
+        // change this ip as well
         const response = await fetch(
-            "http://192.168.2.31:8000/llm/chat",
+            "http://192.168.2.233:8000/llm/chat",
             {
                 method: "POST",
 
